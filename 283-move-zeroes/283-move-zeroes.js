@@ -3,15 +3,15 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 const moveZeroes = (arr) => {
-  const newArr = arr.filter(num => num !== 0);
-  const numZeros = arr.length - newArr.length;
-  
-  let i = 0;
-  while (i < numZeros) {
-    newArr.push(0);
-    console.log(newArr)
-    ++i;
-  }
+  let i = -1; let j = 0;
+  while (j < arr.length) {
+    if (arr[j] !== 0) {
+      ++i;
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
 
-  newArr.forEach((num, i) => arr[i] = num);
+    ++j;
+  }
+  
+  return arr
 }
