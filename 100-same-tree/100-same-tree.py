@@ -20,7 +20,7 @@ class Solution:
           
           if currP is None and currQ is not None or currQ is None and currP is not None:
             return False
-          if currP is None or currQ is None:
+          if currP is None and currQ is None:
             continue
           
           if currP.val != currQ.val:
