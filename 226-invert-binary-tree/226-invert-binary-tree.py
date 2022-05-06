@@ -28,7 +28,6 @@ class Solution(object):
           node = q.pop(0)
           
           oldLeft = node.left
-          oldRight = node.right
           node.left = node.right
           node.right = oldLeft
           
