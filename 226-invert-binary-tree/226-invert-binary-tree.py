@@ -11,7 +11,6 @@ class Solution(object):
         :rtype: TreeNode
         """
         """
-        
         create a queue with the root node inside of it
         while the queue has nodes still on it...
         pop the first node in queue
@@ -36,7 +35,4 @@ class Solution(object):
           if node.left: q.append(node.left)
           if node.right: q.append(node.right)
         return root
-        
-            
-          
         
