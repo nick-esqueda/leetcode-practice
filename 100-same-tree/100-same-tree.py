@@ -22,14 +22,12 @@ class Solution:
             return False
           if currP is None or currQ is None:
             continue
-            
           
           if currP.val != currQ.val:
             return False
           
           staP.append(currP.left)
           staP.append(currP.right)
-          
           staQ.append(currQ.left)
           staQ.append(currQ.right)
         
