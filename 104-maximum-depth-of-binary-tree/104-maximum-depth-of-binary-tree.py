@@ -7,6 +7,7 @@
 class Solution:
 #     def maxDepth(self, root: Optional[TreeNode]) -> int:
 #         """
+#         BFT
 #         """
 #         if not root: return 0
         
@@ -23,44 +24,35 @@ class Solution:
           
 #         return d
           
+#     def maxDepth(self, root: Optional[TreeNode]) -> int:
+#         """
+#         DFT
+#               3
+#             9   20
+#            1 4    10
+#               5
+#              2 6
+        
+        
+#         sta = []
+#         depth = 5
+#         curr = 2
+#         len = 0
+#         while...
+        
+          
+#         return x
+#         """
+        
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        """
-              3
-            9   20
-           1 4    10
-              5
-             2 6
-        
-        
-        sta = []
-        depth = 5
-        curr = 2
-        len = 0
-        while...
-          increment depth
-          newSta = []
-          for the length of sta...
-            pop the node (curr)
-            put the children on newSta if there are any
-            
-          sta = newSta
-          
-        return 5
-        """
-        
-        if not root: return 0
-        
-        sta = [root]
-        d = 0
-        while sta:
-          d += 1
-          newSta = []
-          for _ in range(len(sta)):
-            curr = sta.pop()
-            print(curr.val)
-            if curr.right: newSta.append(curr.right)
-            if curr.left: newSta.append(curr.left)
-              
-          sta = newSta
-          
-        return d
+      """
+      if the root is none, return 0
+      otherwise...
+      take the max of the left tree and the right tree
+      return the max + 1 (for this frame) to the caller
+      """
+      
+      if not root:
+        return 0
+      
+      return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
