@@ -52,20 +52,16 @@ class Solution:
         return maxDepth
         """
         
-        if not root:
-          return 0
-        
-        maxDepth = 1
+        maxDepth = 0
         sta = [(root, 1)]
         while sta:
           curr = sta.pop()
           (node, depth) = curr
           
-          maxDepth = max(depth, maxDepth)
-            
-          if node.left:
+          if node:
+            maxDepth = max(depth, maxDepth)
+
             sta.append((node.left, depth + 1))
-          if node.right:
             sta.append((node.right, depth + 1))
             
         return maxDepth
