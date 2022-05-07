@@ -61,8 +61,7 @@ class Solution:
           curr = sta.pop()
           (node, depth) = curr
           
-          if depth > maxDepth:
-            maxDepth = depth
+          maxDepth = max(depth, maxDepth)
             
           if node.left:
             sta.append((node.left, depth + 1))
@@ -70,7 +69,6 @@ class Solution:
             sta.append((node.right, depth + 1))
             
         return maxDepth
-        
         
         
 #     def maxDepth(self, root: Optional[TreeNode]) -> int:
