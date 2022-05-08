@@ -7,24 +7,27 @@
 class Solution:
   def isBalanced(self, root: Optional[TreeNode]) -> bool:
     """
-    on each frame, need to get the depth of the left subtree and the right subtree
-    if the difference in depths is > 1 or the left tree or right tree aren't balanced, that frame's tree is not balanced
-    return true if both the left and the right subtree are balanced
+    abs(left subtree height - right subtree height) <= 1
+    null nodes have height of 0 and True for isBalanced
     
-    TO GET DEPTH:
-    if not node: return 0
-      
+    
+    inner func:
+      get the height and isBalanced of left and right subtrees 
+      subtract those heights, and if <= 1, isBalanced = T
+      return (max(heightL, heightR) + 1, isBalanced) to the caller
+    
+    return result of calling func, and take index 1 (isBalanced)
     """
-
-    def dft(root):
-      if not root: 
+    
+    def dft(node):
+      if not node:
         return (0, True)
-
-      left = dft(root.left)
-      right = dft(root.right)
       
+      left, right = dft(node.left), dft(node.right)
       isBalanced = abs(left[0] - right[0]) <= 1 and left[1] and right[1]
-
+      
       return (max(left[0], right[0]) + 1, isBalanced)
-
+    
     return dft(root)[1]
+
+    
