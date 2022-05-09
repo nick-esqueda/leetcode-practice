@@ -13,11 +13,11 @@ class Solution:
         left = 0
         right = 1
         while right < len(prices):
-          diff = prices[right] - prices[left]
-          if diff > max:
-            max = diff
-            
-          if prices[right] < prices[left]:
+          profit = prices[right] - prices[left]
+          
+          if profit > max:
+            max = profit
+          if profit < 0:
             left = right
           
           right += 1
