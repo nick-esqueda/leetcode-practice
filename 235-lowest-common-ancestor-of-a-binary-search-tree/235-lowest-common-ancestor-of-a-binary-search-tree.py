@@ -10,13 +10,12 @@ class Solution:
         """
         if node is null, return
         if p is less than or equal to root and q is greater than or equal to root, return node
-        
         """
-        if not root:
-          return False
         
-        print(root.val, p.val, q.val)
-        if p.val <= root.val <= q.val: # if 2 <= 2 <= 1
+        if not root:
+          return
+        
+        if p.val <= root.val <= q.val:
           return root
         elif q.val <= root.val <= p.val:
           return root
