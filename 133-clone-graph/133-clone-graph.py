@@ -30,8 +30,7 @@ class Solution:
         copy = Node(node.val)
         copies[node] = copy
         for nei in node.neighbors:
-          # DOES IT MATTER IF YOU ADD TO THE COPY IN MAP OR NOT?
-          copies[node].neighbors.append(self.cloneGraph(nei, copies))
+          copy.neighbors.append(self.cloneGraph(nei, copies))
         
-        return copies[node]
+        return copy
         
