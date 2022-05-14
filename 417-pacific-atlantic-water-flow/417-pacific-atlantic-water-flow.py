@@ -38,5 +38,6 @@ class Solution:
             if row == len(heights) - 1 or col == len(heights[0]) - 1:
               explore(row, col, atl_set, float('-inf'))
             
+        print(list(pac_set.intersection(atl_set)))
         return list(pac_set.intersection(atl_set))
         
