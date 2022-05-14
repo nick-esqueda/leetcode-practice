@@ -17,17 +17,16 @@ class Solution:
         def explore(row, col, visited, prev_height):
           if row < 0 or col < 0 or row >= len(heights) or col >= len(heights[0]):
             return
-          curr_height = heights[row][col]
-          if curr_height < prev_height:
+          if heights[row][col] < prev_height:
             return
           if (row,col) in visited:
             return
           
           visited.add((row,col))
-          explore(row + 1, col, visited, curr_height)
-          explore(row - 1, col, visited, curr_height)
-          explore(row, col + 1, visited, curr_height)
-          explore(row, col - 1, visited, curr_height)
+          explore(row + 1, col, visited, heights[row][col])
+          explore(row - 1, col, visited, heights[row][col])
+          explore(row, col + 1, visited, heights[row][col])
+          explore(row, col - 1, visited, heights[row][col])
             
           
         pac_set = set()
