@@ -10,9 +10,7 @@ class Solution:
         from the bottom, if each node's left is lesser and right is greater, that node is a BST
         if the left and right nodes are BSTs, and this node is a BST, everything is a BST
         """
-        values = []
-        
-        def isValid(root):
+        def isValid(root, values=[]):
           if not root:
             return True
 
