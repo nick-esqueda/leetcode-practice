@@ -49,8 +49,10 @@ class Solution:
         while curr:
           sta.append(curr)
           curr = curr.left
+          
         curr = sta.pop()
         curr_k += 1
         if curr_k == k:
           return curr.val
+        
         curr = curr.right
