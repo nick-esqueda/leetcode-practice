@@ -27,15 +27,9 @@ class Solution:
         root = TreeNode(curr_val)
         
         idx = inorder.index(curr_val)
-        inorder_L, inorder_R = inorder[:idx], inorder[idx + 1:]
-        preorder_L, preorder_R = preorder[:idx], preorder[idx:]
         
-        root.left = self.buildTree(preorder_L, inorder_L)
-        root.right = self.buildTree(preorder_R, inorder_R)
+        root.left = self.buildTree(preorder[:idx], inorder[:idx])
+        root.right = self.buildTree(preorder[idx:], inorder[idx + 1:])
         
         return root
-      
-        # [0, 1, 2, 3]
-        # [0, 1, 2, 3]
-        
         
