@@ -8,7 +8,8 @@ class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         """
         if you traverse in order, then you will get the nodes in order of value
-        count how many iterations (or length of collected values), and return the val that is at the kth node
+        collect all nums in order, and return the val at the k - 1 idx
+        
         """
         nums = []
         def in_order_trav(root):
@@ -22,5 +23,4 @@ class Solution:
           return
           
         in_order_trav(root)
-        print(nums)
         return nums[k - 1]
