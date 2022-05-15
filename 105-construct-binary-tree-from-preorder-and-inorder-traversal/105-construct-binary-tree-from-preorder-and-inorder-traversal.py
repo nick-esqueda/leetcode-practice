@@ -28,7 +28,7 @@ class Solution:
         
         idx = inorder.index(curr_val)
         inorder_L, inorder_R = inorder[:idx], inorder[idx + 1:]
-        preorder_L, preorder_R = preorder[:len(inorder_L)], preorder[len(inorder_L):]
+        preorder_L, preorder_R = preorder[:idx], preorder[idx:]
         
         root.left = self.buildTree(preorder_L, inorder_L)
         root.right = self.buildTree(preorder_R, inorder_R)
