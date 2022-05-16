@@ -15,9 +15,6 @@ class Solution:
             if not canFinish, return false
           set prereq list to empty if you haven't returned false yet
           return true at end of func (this means that you canFinish all courses leading up to this course)
-        
-        ???:
-        if we start at 0/the first course, will we always be able to tell from that node if we can take every course?
         """
         graph = {}
         for course, prereq in prerequisites:
@@ -41,7 +38,8 @@ class Solution:
           
         for course in graph:
           if graph[course]:
-            if dft(course, set()) is False:
+            bruh = set()
+            if dft(course, bruh) is False:
               return False
             
         return True
