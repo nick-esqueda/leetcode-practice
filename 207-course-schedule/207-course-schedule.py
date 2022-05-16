@@ -25,12 +25,10 @@ class Solution:
           if prereq not in graph: graph[prereq] = []
           graph[course].append(prereq)
           
-          
         def dft(course, visited):
           if graph[course] == []:
             return True
           if course in visited:
-            print(course, 'here')
             return False
           
           visited.add(course)
@@ -41,10 +39,8 @@ class Solution:
           graph[course] = []
           return True
           
-          
         for course in graph:
           if graph[course]:
-            print ('course adhakdsjjadsf', course)
             if dft(course, set()) is False:
               return False
             
