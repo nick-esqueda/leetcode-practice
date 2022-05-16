@@ -38,8 +38,7 @@ class Solution:
           
         for course in graph:
           if graph[course]:
-            bruh = set()
-            if dft(course, bruh) is False:
+            if dft(course, set()) is False:
               return False
             
         return True
