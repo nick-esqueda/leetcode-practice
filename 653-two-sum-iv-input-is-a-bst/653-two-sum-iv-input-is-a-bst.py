@@ -20,19 +20,14 @@ class Solution:
         call DFS with root, and return the outcome of the call
         """
         def dfs(root, comps):
-          if not root:
-            return False
+          if not root:return False
           
-          if dfs(root.left, comps) is True:
-            return True
+          if dfs(root.left, comps) is True: return True
           
-          if root.val in comps:
-            return True
-          else:
-            comps.add(k - root.val)
+          if root.val in comps: return True
+          else: comps.add(k - root.val)
           
-          if dfs(root.right, comps) is True:
-            return True
+          if dfs(root.right, comps) is True: return True
           
           return False
         
