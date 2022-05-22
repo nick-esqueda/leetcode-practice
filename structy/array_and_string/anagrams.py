@@ -1,21 +1,13 @@
 def anagrams(s1, s2):
-  if len(s1) != len(s2): return False
+  return get_char_counts(s1) == get_char_counts(s2)
 
-  s1_map = {}
-  s2_map = {}
-  i = 0
-  while i < len(s1): 
-    if s1[i] not in s1_map:
-      s1_map[s1[i]] = 1
+def get_char_counts(s):
+  counts = {}
+  for char in s:
+    if char in counts:
+      counts[char] += 1
     else:
-      s1_map[s1[i]] += 1
-    if s2[i] not in s2_map:
-      s2_map[s2[i]] = 1
-    else:
-      s2_map[s2[i]] += 1
-    
-    i += 1
-      
-  return s1_map == s2_map
+      counts[char] = 1
+  return counts
     
 print(anagrams('cats', 'tocs')) # -> False
