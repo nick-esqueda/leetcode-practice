@@ -10,7 +10,7 @@ def compress(s):
   keep iterating
   """
   s += "!"
-  res = ""
+  res = []
   i, j = 0, 0
   while j < len(s):
     if s[j] == s[i]:
@@ -18,10 +18,10 @@ def compress(s):
     else:
       count = j - i
       if count > 1:
-        res += f"{count}{s[i]}"
+        res.append(f"{count}{s[i]}")
       else:
-        res += f"{s[i]}"
+        res.append(f"{s[i]}")
       i = j
       j += 1
       
-  return res
+  return ''.join(res)
