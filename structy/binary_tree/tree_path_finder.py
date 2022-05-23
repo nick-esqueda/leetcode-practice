@@ -22,3 +22,22 @@ def path_finder(root, target):
       q.append([*curr_path, curr_node.left])
     if curr_node.right:
       q.append([*curr_path, curr_node.right])
+
+
+def path_finder(root, target):
+  if not root:
+    return None
+  
+  if root.val == target:
+    return [root.val]
+  
+  left = path_finder(root.left, target)
+  right = path_finder(root.right, target)
+
+  if left:
+    return [root.val] + left
+  elif right:
+    return [root.val] + right
+  else:
+    return None
+  
