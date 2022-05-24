@@ -17,3 +17,24 @@ def leaf_list(root):
 
   get_leaves(root)
   return leaves
+
+def leaf_list(root):
+  if root is None:
+    return []
+  
+  leaves = []
+  sta = [root]
+  while sta:
+    curr = sta.pop()
+    
+    if curr.left is None and curr.right is None:
+      leaves.append(curr.val)
+      continue
+      
+    if curr.right:
+      sta.append(curr.right)
+    if curr.left:
+      sta.append(curr.left)
+      
+  return leaves
+    
