@@ -18,6 +18,7 @@ def leaf_list(root):
   get_leaves(root)
   return leaves
 
+
 def leaf_list(root):
   if root is None:
     return []
