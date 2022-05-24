@@ -14,22 +14,15 @@ def bottom_right_value(root):
     on the last iteration of the inner loop, reassign rightmost var
   after iterating, return the rightmost var as the last level will have been most recent
   """
-  rightmost = root.val
+  curr = None
   q = deque([root])
   while q:
-    len_q = len(q)
-    for i in range(len_q):
-      curr = q.popleft()
-      
-      if i == len_q - 1:
-        rightmost = curr.val
-        
-      if curr.left:
-        q.append(curr.left)
-      if curr.right:
-        q.append(curr.right)
-        
-  return rightmost
+    curr = q.popleft()
+    if curr.left:
+      q.append(curr.left)
+    if curr.right:
+      q.append(curr.right)
+  return curr.val
   
   
 a = Node(3)
