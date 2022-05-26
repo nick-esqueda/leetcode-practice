@@ -1,2 +1,2 @@
 # leetcode-practice
-Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub](https://github.com/QasimWani/LeetHub)
+repository for all leetcode and https://structy.net/ problems i've completed or am in the middle of completing
