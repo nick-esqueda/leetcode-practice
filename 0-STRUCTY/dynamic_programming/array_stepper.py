@@ -35,3 +35,36 @@ def array_stepper(numbers):
       
 
 print(array_stepper([2, 4, 2, 0, 0, 1]))
+
+
+# WHY DOES THIS NOT WORK WITH DEFAULT PARAMS FOR i AND memo? 
+# 1ST TEST CASE PASSES BUT NOT 2ND
+def array_stepper(numbers):
+  return _array_stepper(numbers, 0, {})
+  
+def _array_stepper(numbers, i, memo):
+  """
+  arr[i] is the number of decisions we can make
+  if i == len(nums) - 1 at any point, return True
+  if arr[i] == 0, return False
+  
+  iterate arr[i] number of times starting at i + 1
+    recurse with i as the new starting point
+      if a true is returned on any iteration, return true
+      
+  return false if you make it through the loop
+  """
+  if i in memo:
+    return memo[i]
+  if i >= len(numbers) - 1:
+    return True
+  if numbers[i] == 0:
+    return False
+  
+  for j in range(i + 1, numbers[i] + i + 1):
+    if _array_stepper(numbers, j, memo) is True:
+      memo[i] = True
+      return True
+    
+  memo[i] = False
+  return False
