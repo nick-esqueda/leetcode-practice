@@ -34,10 +34,10 @@ def _counting_change(amount, coins, i, memo):
     return 0
   
   way_count = 0
-  coin = coins[i] # i = 2, coin = 3
-  for coin_qty in range((amount // coin) + 1): # 1
+  coin = coins[i] 
+  for coin_qty in range((amount // coin) + 1):
     remainder = amount - (coin_qty * coin)
-    way_count += _counting_change(remainder, coins, i + 1)
+    way_count += _counting_change(remainder, coins, i + 1, memo)
     
   memo[key] = way_count
   return memo[key]
