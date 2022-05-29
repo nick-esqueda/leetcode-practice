@@ -19,14 +19,13 @@ def overlap_subsequence(string_1, string_2, i=0, j=0, memo={}):
   if i >= len(string_1) or j >= len(string_2):
     return 0
   
-  count = 0
   if string_1[i] == string_2[j]:
-    count = 1 + overlap_subsequence(string_1, string_2, i + 1, j + 1, memo)
+    memo[key] = 1 + overlap_subsequence(string_1, string_2, i + 1, j + 1, memo)
   else:
-    without_1 = overlap_subsequence(string_1, string_2, i + 1, j, memo)
-    without_2 = overlap_subsequence(string_1, string_2, i, j + 1, memo)
-    count = max(without_1, without_2)
+    memo[key] = max(
+      overlap_subsequence(string_1, string_2, i + 1, j, memo),
+      overlap_subsequence(string_1, string_2, i, j + 1, memo)
+    )
     
-  memo[key] = count
   return memo[key]
   
