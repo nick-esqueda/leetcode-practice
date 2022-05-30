@@ -23,6 +23,21 @@ def paired_parentheses(string):
       else:
         sta.pop()
   
-  return True if len(sta) == 0 else False
+  return len(sta) == 0
 
 print(paired_parentheses("()rose(jeff"))
+
+
+def paired_parentheses(string):
+  count = 0
+  
+  for c in string:
+    if c == "(":
+      count += 1
+    elif c == ")":
+      count -= 1
+      if count < 0:
+        return False
+      
+  return count == 0
+      
