@@ -42,3 +42,19 @@ print(permutations(['a', 'b', 'c'])) # ->
 #   [ 'c', 'a', 'b' ], 
 #   [ 'c', 'b', 'a' ] 
 # ] 
+
+
+def permutations(items):
+  if len(items) == 0:
+    return [[]]
+  
+  last = items.pop()
+  perms = permutations(items)
+  
+  all_perms = []
+  for perm in perms:
+    for i in range(len(perm) + 1):
+      all_perms.append(perm[:i] + [last] + perm[i:])
+      
+  return all_perms
+      
