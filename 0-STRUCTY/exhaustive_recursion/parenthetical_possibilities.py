@@ -43,3 +43,35 @@ def parenthetical_possibilities(s):
     
     
 print(parenthetical_possibilities("(qr)ab(stu)c") )
+
+
+def parenthetical_possibilities(s):
+  if len(s) == 0:
+    return [""]
+  
+  res = []
+  options, start = get_options(s)
+  
+  for c in options:
+    results = parenthetical_possibilities(s[start:])
+    for result in results:
+      res.append(c + result)
+  
+  return res
+      
+  
+def get_options(s):
+  options = []
+  if s[0] == "(":
+    i = 1
+    while s[i] != ")":
+      options.append(s[i])
+      i += 1
+    return options, i + 1
+  else:
+    options.append(s[0])
+    return options, 1
+  
+      
+    
+print(parenthetical_possibilities("x(mn)yz") )
