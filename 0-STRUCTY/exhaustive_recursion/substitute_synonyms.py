@@ -1,46 +1,35 @@
 def substitute_synonyms(sentence, synonyms):
-  """
-  declare result var = [] (array of strings)
-  declare options var = []
-  strip out the first "word" (a word stops at a space)
-  if the first word is in the map:
-    push each syn to the options var
-  else it's not in the map:
-    add that word to options var
-    
-  for each option: (can be optimized with memoization)
-    recurse with the rest of the sentence (minus first word)
-    add the syn to the beginning of each of those sentences
-    push those modified sentences to the result var
-    
-  return result
-  """
-  if len(sentence) == 0:
+  words = sentence.split()
+  subs = get_subs(words, synonyms)
+  return subs
+
+def get_subs(words, synonyms):
+  if len(words) == 0:
     return [""]
   
-  result = []
-  options = []
+  first = words[0]
+  remainder = words[1:]
   
-  words = sentence.split()
-  first_word = words[0]
-  remainder = " ".join(words[1:])
-    
-  if first_word in synonyms:
-    for syn in synonyms[first_word]:
+  possibilities = get_subs(remainder, synonyms)
+  
+  res = []
+  options = []
+  if first in synonyms:
+    for syn in synonyms[first]:
       options.append(syn)
   else:
-    options.append(first_word)
+    options.append(first)
     
   for option in options:
-    sentences = substitute_synonyms(remainder, synonyms)
-    for sentence in sentences:
-      if sentence == "":
-        result.append(option)
+    for sent in possibilities:
+      if sent == "":
+        res.append(option)
       else:
-        result.append(option + ' ' + sentence)
+        res.append(option + ' ' + sent)
       
-  return result
+  return res
     
+
     
 sentence = "follow the yellow brick road"
 synonyms = {
