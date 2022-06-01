@@ -25,4 +25,18 @@ def lefty_nodes(root):
   
   return lefties
     
-    
+
+def lefty_nodes(root, lefties=[], cur_lvl=0):
+  if not root:
+    return []
+  
+  if cur_lvl == len(lefties):
+    lefties.append(root.val)
+  
+  lefty_nodes(root.left, lefties, cur_lvl + 1)
+  lefty_nodes(root.right, lefties, cur_lvl + 1)
+  return lefties
+  
+  
+  
+  
