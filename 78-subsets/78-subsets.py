@@ -9,7 +9,7 @@ class Solution:
       last = nums.pop()
       subs_without_last = self.subsets(nums)
       
-      all_subsets = [s for s in subs_without_last]
+      all_subsets = subs_without_last.copy()
       for sub in subs_without_last:
         all_subsets.append([*sub, last])
         
