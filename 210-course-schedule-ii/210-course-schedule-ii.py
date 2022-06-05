@@ -2,8 +2,8 @@ class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
       """
       topological order
-      *need to account for cycles
-      *need to handle courses that don't have prerequisites
+      need to account for cycles
+      need to handle courses that don't have prerequisites
       """
       graph = self.create_graph(prerequisites, numCourses)
         
