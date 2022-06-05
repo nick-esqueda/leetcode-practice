@@ -1,59 +1,41 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
       """
-      same as course sched 1, but push courses to an array before returning true at end of dfs
-      
-      create adj list
-      
-      declare order = []
-      for each course in adj list, traverse starting at course with new set() every time
-        if the traversal returns False, early return -> [] from whole func
-      return order
-      
-      traversal:
-        if the course has no prereqs, return true
-        if the course is in visited set already, return false
-        add the course to visited
-        for each prereq:
-          if trav() returns false, early return false
-        if you haven't returned yet...
-        set courses prereqs to [] in adj list
-        push this course to the order list
-        return True
+      topological order
+      *need to account for cycles
+      *need to handle courses that don't have prerequisites
       """
-      
-      graph = {}
-      for course, prereq in prerequisites:
-        if course not in graph: graph[course] = []
-        if prereq not in graph: graph[prereq] = []
-        graph[course].append(prereq)
+      graph = self.create_graph(prerequisites, numCourses)
         
-      def can_finish(course, visited):
-        if graph[course] == []:
-          if course not in order:
-            order.append(course)
-          return True
-        if course in visited:
-          return False
-        
-        visited.add(course)
-        for prereq in graph[course]:
-          if not can_finish(prereq, visited):
-            return False
-        
-        graph[course] = []
-        order.append(course)
-        return True
-      
+      num_parents = {}
+      for node in graph:
+        num_parents[node] = 0
+      for node in graph:
+        for child in graph[node]:
+          num_parents[child] += 1
+          
       order = []
-      for course in graph:
-        if not can_finish(course, set()):
+      ready = [node for node in num_parents if num_parents[node] == 0]
+      while ready:
+        node = ready.pop()
+        order.append(node)
+        for child in graph[node]:
+          num_parents[child] -= 1
+          if num_parents[child] == 0:
+            ready.append(child)
+            
+      for node in num_parents:
+        if num_parents[node] > 0:
           return []
         
-      for i in range(numCourses):
-        if i not in order:
-          order.append(i)
+      return order[::-1]
         
-      return order
-        
-        
+    def create_graph(self, edges, numCourses):
+      graph = { i: [] for i in range(numCourses) }
+      for course, prereq in edges:
+        if course not in graph:
+          graph[course] = []
+        if prereq not in graph:
+          graph[prereq] = []
+        graph[course].append(prereq)
+      return graph
