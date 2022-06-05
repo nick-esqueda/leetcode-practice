@@ -9,9 +9,9 @@ class Solution:
           return [[]]
         
         last = nums.pop()
-        perms = self.permute(nums) # [[]]
+        perms = self.permute(nums)
         
-        all_perms = [] # [[1]]
+        all_perms = []
         for perm in perms:
           for i in range(len(perm) + 1):
             all_perms.append([*perm[:i], last, *perm[i:]])
