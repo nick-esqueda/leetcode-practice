@@ -1,16 +1,20 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-      """
-      a subset can be made by getting all of the subsets of the array minus 1 element and adding that element back in
-      """
-      if not nums:
-        return [[]]
-      
-      last = nums.pop()
-      subs_without_last = self.subsets(nums)
-      
-      all_subsets = subs_without_last.copy()
-      for sub in subs_without_last:
-        all_subsets.append([*sub, last])
+        all_subsets = []
+        subset = []
         
-      return all_subsets
+        def get_subsets(i):
+            if i > len(nums):
+                return
+            if i == len(nums):
+                all_subsets.append(subset[::])
+                return
+            
+            subset.append(nums[i])
+            get_subsets(i + 1)
+            
+            subset.pop()
+            get_subsets(i + 1)
+        
+        get_subsets(0)
+        return all_subsets
