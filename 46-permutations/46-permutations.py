@@ -1,20 +1,20 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         """
-        can get all permutations by removing one element, getting all of the perms of that subarray,
-          and then adding the element back in and shifting it through the array
-        if nums is empty, return [[]]
+        can choose which element to remove to get the perms of the smaller list
+        add the removed element back into all of the returned perms
         """
-        if not nums:
-          return [[]]
-        
-        last = nums.pop()
-        perms = self.permute(nums)
+        if len(nums) == 1:
+            return [nums]
         
         all_perms = []
-        for perm in perms:
-          for i in range(len(perm) + 1):
-            all_perms.append([*perm[:i], last, *perm[i:]])
-            
-        return all_perms
         
+        for i in range(len(nums)):
+            copy = nums[::]
+            num = copy.pop(i)
+            perms = self.permute(copy)
+            for perm in perms:
+                perm.append(num)
+                all_perms.append(perm)
+                
+        return all_perms
