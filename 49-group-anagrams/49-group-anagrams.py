@@ -5,6 +5,7 @@ class Solution:
         
         count_map = {}
         letters = "abcdefghijklmnopqrstuvwxyz"
+        
         for s in strs:
             counts = [0] * 26
             for char in s:
