@@ -2,7 +2,6 @@ class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
         """
         """
-        # rows
         rows = collections.defaultdict(set)
         cols = collections.defaultdict(set)
         subboxes = collections.defaultdict(set)
