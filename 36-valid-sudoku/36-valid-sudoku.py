@@ -3,39 +3,20 @@ class Solution:
         """
         """
         # rows
-        for r in range(len(board)):
-            row_set = set()
-            for c in range(len(board[r])):
+        rows = collections.defaultdict(set)
+        cols = collections.defaultdict(set)
+        subboxes = collections.defaultdict(set)
+        for r in range(9):
+            for c in range(9):
                 num = board[r][c]
-                if num in row_set:
+                if (num in rows[r] or
+                    num in cols[c] or
+                    num in subboxes[(r//3, c//3)]):
                     return False  
                 else:
                     if num != ".":
-                        row_set.add(num)
+                        rows[r].add(num)
+                        cols[c].add(num)
+                        subboxes[(r//3, c//3)].add(num)
              
-        # cols
-        for c in range(len(board[0])):
-            col_set = set()
-            for r in range(len(board)):
-                num = board[r][c]
-                if num in col_set:
-                    return False
-                else:
-                    if num != ".":
-                        col_set.add(num)
-        # 3x3
-        subbox_sets = {}
-        for r in range(3):
-            for c in range(3):
-                subbox_sets[(r, c)] = set()
-                
-        for r in range(len(board)):
-            for c in range(len(board[r])):
-                num = board[r][c]
-                if num in subbox_sets[(r//3, c//3)]:
-                    return False
-                else:
-                    if num != ".":
-                        subbox_sets[(r//3, c//3)].add(num)
-
         return True
