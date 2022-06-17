@@ -22,6 +22,7 @@ class Solution:
                 num -= 1
             return seq_len
         
+        
         num_set = set(nums)
         max_seq = 0
         for num in nums:
