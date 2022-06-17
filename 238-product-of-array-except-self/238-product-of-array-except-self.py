@@ -24,7 +24,6 @@ class Solution:
             product = prefixes[i - 1] * nums[i - 1]
             prefixes.append(product)
             i += 1
-        print('pres', prefixes)
         
         suffixes = [0] * len(nums)
         suffixes[-1] = 1
@@ -32,7 +31,6 @@ class Solution:
         while i >= 0:
             suffixes[i] = suffixes[i + 1] * nums[i + 1]
             i -= 1
-        print('sufs', suffixes)   
             
         rtn = []
         for i in range(len(nums)):
