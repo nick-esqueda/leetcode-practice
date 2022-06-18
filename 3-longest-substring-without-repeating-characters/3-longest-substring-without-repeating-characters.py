@@ -16,7 +16,6 @@ class Solution:
             else:
                 chars.remove(s[i])
                 i += 1
-                # j += 1
                 
         return max_len
             
