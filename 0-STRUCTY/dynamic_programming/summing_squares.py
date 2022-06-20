@@ -34,3 +34,24 @@ def min_squares(n, squares, memo):
   return memo[n]
   
   
+
+# 2
+def summing_squares(n):
+  return _summing_squares(n, {})
+
+def _summing_squares(n, memo):
+  if n in memo:
+    return memo[n]
+  if n <= 1:
+    return n
+  
+  squares = [i*i for i in range(1, n + 1) if i*i <= n]
+  min_squares = float('inf')
+  for square in squares:
+    count = 1 + _summing_squares(n - square, memo)
+    min_squares = min(count, min_squares)
+  
+  memo[n] = min_squares
+  return memo[n]
+  
+  
