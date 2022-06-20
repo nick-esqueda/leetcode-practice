@@ -39,3 +39,19 @@ def non_adjacent_sum(nums, i=0, memo={}):
   without_num = non_adjacent_sum(nums, i + 1, memo)
   memo[i] = max(with_num, without_num)
   return memo[i]
+
+
+
+# 2
+def non_adjacent_sum(nums):
+  return _non_adjacent_sum(nums, 0, {})
+  
+def _non_adjacent_sum(nums, i, memo):
+  if i in memo:
+    return memo[i]
+  if i >= len(nums):
+    return 0
+  
+  memo[i] = max(nums[i] + _non_adjacent_sum(nums, i + 2, memo),
+      _non_adjacent_sum(nums, i + 1, memo))
+  return memo[i]
