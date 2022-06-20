@@ -19,3 +19,22 @@ def max_path_sum(grid, r=0, c=0, memo={}):
         + grid[r][c]
   )
   return memo[pos]
+
+
+# 2
+def max_path_sum(grid):
+  return _max_path_sum(grid, 0, 0, {})
+
+def _max_path_sum(grid, r, c, memo):
+  key = (r, c)
+  if key in memo:
+    return memo[key]
+  if r >= len(grid) or c >= len(grid[0]):
+    return 0
+  if r == len(grid) - 1 and c == len(grid[0]) - 1:
+    return grid[r][c]
+  
+  memo[key] = grid[r][c] + max(
+    _max_path_sum(grid, r + 1, c, memo), 
+    _max_path_sum(grid, r, c + 1, memo))
+  return memo[key]
