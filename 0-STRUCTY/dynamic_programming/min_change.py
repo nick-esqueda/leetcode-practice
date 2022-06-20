@@ -31,3 +31,23 @@ def min_change(amount, coins, memo={}):
   return memo[amount]
     
     
+# 2
+def min_change(amount, coins):
+  return _min_change(amount, coins, {})
+
+def _min_change(amount, coins, memo):
+  if amount in memo:
+    return memo[amount]
+  if amount == 0:
+    return 0
+  if amount < 0:
+    return -1
+  
+  min_coins = float('inf')
+  for coin in coins:
+    count = _min_change(amount - coin, coins, memo)
+    if count >= 0:
+      min_coins = min(count + 1, min_coins)
+  
+  memo[amount] = -1 if min_coins == float('inf') else min_coins
+  return memo[amount]
