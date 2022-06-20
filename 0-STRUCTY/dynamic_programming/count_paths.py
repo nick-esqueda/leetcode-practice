@@ -18,3 +18,22 @@ def count_paths(grid, r=0, c=0, memo={}):
   right_count = count_paths(grid, r, c + 1)
   memo[(r, c)] = down_count + right_count
   return memo[(r, c)]
+
+
+# 2 
+def count_paths(grid):
+  return _count_paths(grid, 0, 0, {})
+
+def _count_paths(grid, r, c, memo):
+  key = (r, c)
+  if key in memo:
+    return memo[key]
+  if r >= len(grid) or c >= len(grid[0]):
+    return 0    
+  if grid[r][c] == "X":
+    return 0
+  if r == len(grid) - 1 and c == len(grid[0]) - 1:
+    return 1
+  
+  memo[key] = _count_paths(grid, r + 1, c, memo) + _count_paths(grid, r, c + 1, memo)
+  return memo[key]
