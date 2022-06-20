@@ -68,3 +68,26 @@ def _array_stepper(numbers, i, memo):
     
   memo[i] = False
   return False
+
+
+
+# 2 
+def array_stepper(numbers):
+  return _array_stepper(numbers, 0, {})
+
+def _array_stepper(numbers, i, memo):
+  if i in memo:
+    return memo[i]
+  if i >= len(numbers) - 1:
+    return True
+  if numbers[i] == 0:
+    return False
+  
+  max_steps = numbers[i]
+  for step_size in range(1, max_steps + 1):
+    if _array_stepper(numbers, i + step_size, memo):
+      memo[i] = True
+      return True
+  
+  memo[i] = False
+  return False
