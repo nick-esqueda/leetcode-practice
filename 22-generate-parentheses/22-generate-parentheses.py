@@ -10,8 +10,6 @@ class Solution:
         whenever open and close counts are both == n, append that string to rtn list
         """
         rtn = []
-        opening = 0
-        closing = 0
         
         def backtrack(parens, opening, closing):
             if opening == n and closing == n:
