@@ -30,3 +30,25 @@ def _quickest_concat(s, words, memo):
 
 
 print(quickest_concat('caution', ['ion', 'caut', 'caution']))
+
+
+
+# 2 
+def quickest_concat(s, words):
+  return _quickest_concat(s, words, {})
+
+def _quickest_concat(s, words, memo):
+  if s in memo:
+    return memo[s]
+  if len(s) == 0:
+    return 0
+  
+  quickest = float('inf')
+  for word in words:
+    if s.startswith(word):
+      attempt = 1 + _quickest_concat(s[len(word):], words, memo)
+      if attempt > 0:
+        quickest = min(attempt, quickest)
+  
+  memo[s] = quickest if quickest != float('inf') else -1
+  return memo[s]
