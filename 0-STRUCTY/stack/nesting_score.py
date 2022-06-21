@@ -25,3 +25,20 @@ def nesting_score(string):
         
   return stack[0]
       
+
+
+# 2
+def nesting_score(string):
+  sta = []
+  for brack in string:
+    if brack == "[":
+      sta.append(0)
+    elif brack == "]":
+      if sta[-1] == 0:
+        sta[-1] += 1
+      else:
+        pop_sum = 0
+        while sta[-1] != 0:
+          pop_sum += sta.pop()
+        sta[-1] += pop_sum * 2
+  return sum(sta)
