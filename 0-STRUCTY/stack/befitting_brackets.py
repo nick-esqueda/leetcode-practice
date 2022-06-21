@@ -30,3 +30,24 @@ def befitting_brackets(string):
 
 
 print(befitting_brackets('[][}'))
+
+
+
+# 2
+def befitting_brackets(string):
+  map = {
+    "(": ")",
+    "[": "]",
+    "{": "}"
+  }
+  
+  sta = []
+  for char in string:
+    if char in map:
+      sta.append(char)
+    else:
+      if not sta or char != map[sta.pop()]:
+        return False
+  return len(sta) == 0
+  
+  
