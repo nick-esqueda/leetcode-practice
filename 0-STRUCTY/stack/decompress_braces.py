@@ -32,3 +32,28 @@ def decompress_braces(string):
   
   
 print(decompress_braces("z3{a2{xy}b}"))
+
+
+
+# 2
+def decompress_braces(string):
+  sta = []
+  for char in string:
+    if char == "{":
+      continue
+    elif char == "}":
+      uncompress_and_replace(sta)
+    else:
+      sta.append(char)
+      
+  return ''.join(sta)
+
+def uncompress_and_replace(sta):
+  numbers = '1234567890'
+  uncomp = []
+  while sta[-1] not in numbers:
+    uncomp.append(sta.pop())
+  sta.append(int(sta.pop()) * ''.join(uncomp[::-1]))
+  
+  
+  
