@@ -42,3 +42,16 @@ def nesting_score(string):
           pop_sum += sta.pop()
         sta[-1] += pop_sum * 2
   return sum(sta)
+
+def nesting_score(string):
+  sta = [0]
+  for brack in string:
+    if brack == "[":
+      sta.append(0)
+    elif brack == "]":
+      top = sta.pop()
+      if top == 0:
+        sta[-1] += 1
+      else:
+        sta[-1] += top * 2
+  return sta[0]
