@@ -6,12 +6,19 @@
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         """
+        assign head.next to the node that normally comes next, UNLESS it's the node we want to delete
+        if you realize that the current node is the one you need to delete, return cur.next 
+            this is so that the recursive caller get's back the NEXT next node, instead of the OG next node
+        else if the current node isn't the one you want to delete, return the curr node as it is
+        you can tell which node you want to delete/where you are by keeping track of a position variable
+            that you can increment after the recursive call
+        if this current position == n, then this is the node you want to delete, so return curr.next
         """
-        def delete_n(head, i=0):
+        def delete_n(head):
             if head is None:
                 return (None, 0)
             
-            head.next, next_pos = delete_n(head.next, i + 1)
+            head.next, next_pos = delete_n(head.next)
             curr_pos = 1 + next_pos
             
             if curr_pos == n:
@@ -22,6 +29,7 @@ class Solution:
         return delete_n(head)[0]
         
         
+#     ITERATIVE O(2n)
 #     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
 #         """
 #         get the len of LL by iterating once through and counting nodes
