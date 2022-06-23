@@ -6,7 +6,6 @@
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         """
-        what to do if n is 1?
         """
         def delete_n(head, i=0):
             if head is None:
