@@ -44,8 +44,7 @@ class Solution:
         dummy = ListNode(0)
         dummy.next = head
         
-        left = dummy
-        right = head
+        left, right = dummy, head
         while n != 0:
             right = right.next
             n -= 1
