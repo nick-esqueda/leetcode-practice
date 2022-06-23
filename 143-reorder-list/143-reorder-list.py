@@ -36,14 +36,15 @@ class Solution:
         move the pointers up
         idk, something like this
         """
+        # FIND MIDPOINT
         slow, fast = head, head.next
         while fast and fast.next:
             slow = slow.next
             fast = fast.next.next
-        
         back = slow.next
         slow.next = None
         
+        # REVERSE BACK HALF
         cur, prev = back, None
         while cur:
             nxt = cur.next
@@ -51,6 +52,7 @@ class Solution:
             prev = cur
             cur = nxt
         
+        # ZIPPER FRONT AND BACK HALVES
         front, back = head, prev
         while front and back:
             front_nxt = front.next
