@@ -19,7 +19,7 @@ class Solution:
         rtn = sum_l
         remainder = 0
         cur1, cur2 = l1, l2
-        while cur1 or cur2:
+        while cur1 or cur2 or remainder:
             val1 = cur1.val if cur1 else 0
             val2 = cur2.val if cur2 else 0
             cur_sum = val1 + val2 + remainder
@@ -35,6 +35,4 @@ class Solution:
             cur2 = cur2.next if cur2 else None
             sum_l = sum_l.next
         
-        if remainder == 1:
-            sum_l.next = ListNode(1)
         return rtn.next
