@@ -23,8 +23,8 @@ class WordDictionary:
         can maybe do this recursively, throwing in the rest of the word
         """
         def backtrack(node, i):
-            if i >= len(word) and node.is_word:
-                return True
+            if i >= len(word):
+                return node.is_word
             
             while i < len(word) and word[i] in node.children:
                 node = node.children[word[i]]
@@ -33,11 +33,10 @@ class WordDictionary:
             if i == len(word):
                 return node.is_word
             
-            elif word[i] == ".":
+            if word[i] == ".":
                 for child in node.children:
                     if backtrack(node.children[child], i + 1):
                         return True
-                    
             return False
                 
         return backtrack(self.root, 0)
