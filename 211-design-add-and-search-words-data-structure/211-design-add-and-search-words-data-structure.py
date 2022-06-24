@@ -21,18 +21,15 @@ class WordDictionary:
         """
         if the char is a dot, need to go search through all children
         can maybe do this recursively, throwing in the rest of the word
+        iterate through word normally for letters that aren't '.'
+        for '.', make recursive call, passing in each possible child
         """
         def backtrack(node, i):
-            if i >= len(word):
-                return node.is_word
-            
             while i < len(word) and word[i] in node.children:
                 node = node.children[word[i]]
                 i += 1
-                
             if i == len(word):
                 return node.is_word
-            
             if word[i] == ".":
                 for child in node.children:
                     if backtrack(node.children[child], i + 1):
