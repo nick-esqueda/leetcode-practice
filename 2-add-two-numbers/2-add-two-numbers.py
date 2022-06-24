@@ -20,16 +20,9 @@ class Solution:
         remainder = 0
         cur1, cur2 = l1, l2
         while cur1 or cur2:
-            if not cur1:
-                cur_sum = cur2.val + remainder
-                cur2 = cur2.next
-            elif not cur2:
-                cur_sum = cur1.val + remainder
-                cur1 = cur1.next
-            else:
-                cur_sum = cur1.val + cur2.val + remainder
-                cur1 = cur1.next
-                cur2 = cur2.next
+            val1 = cur1.val if cur1 else 0
+            val2 = cur2.val if cur2 else 0
+            cur_sum = val1 + val2 + remainder
                 
             if cur_sum >= 10:
                 sum_l.next = ListNode(cur_sum - 10)
@@ -38,6 +31,8 @@ class Solution:
                 sum_l.next = ListNode(cur_sum)
                 remainder = 0
                 
+            cur1 = cur1.next if cur1 else None
+            cur2 = cur2.next if cur2 else None
             sum_l = sum_l.next
         
         if remainder == 1:
