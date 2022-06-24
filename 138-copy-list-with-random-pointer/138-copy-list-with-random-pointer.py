@@ -8,7 +8,7 @@ class Node:
 """
 
 class Solution:
-    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+    def copyRandomList(self, head: 'Optional[Node]', copies={}) -> 'Optional[Node]':
         """
         go through and copy each node's values verbatim
         each new node's next and random pointers should point to the nodes in the new list, not the old one
@@ -20,17 +20,13 @@ class Solution:
         assign the new node's .random to theh return of another recursive call
         return the copy node
         """
-        copies = {}
-        def make_copy(head):
-            if not head:
-                return None
-            if head in copies:
-                return copies[head]
-            
-            copy = Node(head.val)
-            copies[head] = copy
-            copy.next = make_copy(head.next)
-            copy.random = make_copy(head.random)
-            return copy
-        
-        return make_copy(head)
+        if not head:
+            return None
+        if head in copies:
+            return copies[head]
+
+        copy = Node(head.val)
+        copies[head] = copy
+        copy.next = self.copyRandomList(head.next)
+        copy.random = self.copyRandomList(head.random)
+        return copy
