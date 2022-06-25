@@ -38,8 +38,7 @@ class TimeMap:
             val, ts = vals[mid]
             
             if ts < timestamp:
-                if ts > cur_max[1]:
-                    cur_max = (val, ts)
+                cur_max = (val, ts)
                 lo = mid + 1
             elif ts > timestamp:
                 hi = mid - 1
