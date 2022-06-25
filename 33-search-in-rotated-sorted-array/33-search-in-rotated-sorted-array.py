@@ -7,7 +7,6 @@ class Solution:
         if the midpoint is less than the right, the right side is still normal
         if midpoint is between two number's values, everything is like normal
         
-        
         if the target is between mid and right, move lo up (mid has to be lower than right)
         if the target is between mid and left, move hi down (mid has to be higher than right)
         
@@ -15,10 +14,6 @@ class Solution:
         if mid is lower than left and target is higher than left, move hi down, else move lo up
         
         if the nums weren't unique, you'd run into a case where right/left == mid, and then you couldn't determine direction
-        
-        8
-        [4,5,6,7,8,1,2,3]
-         L     M       H  
         """
         
         lo, hi = 0, len(nums) - 1
@@ -36,6 +31,7 @@ class Solution:
                 hi = mid - 1
             elif nums[mid] > nums[hi] and target <= nums[hi]:
                 lo = mid + 1
+            # to take care of numbers that don't exist, or for overlapping errors
             else:
                 lo += 1
                 
