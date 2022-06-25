@@ -18,6 +18,9 @@ class TimeMap:
         if a timestamp like that doesn't exist (the given TS is earlier than any already set TS)
             return ""
         just loop backwards through the key's value array and return the first TS item that is <= timestamp?
+        ^ instead of that, can binary search through each val/ts pair, searching for the ts
+        keep track of a max ts that is still less than the given timestamp
+            that way, if you can't find a ts == timestamp, you can return the closest ts you found
         
         4
         [("", 1), ("", 3), ("", 7), ("", 8)]
@@ -26,12 +29,9 @@ class TimeMap:
         if key not in self.store:
             return ""
         
-        # for value, ts in reversed(self.store[key]):
-        #     if ts <= timestamp:
-        #         return value
-        
         vals = self.store[key]
         cur_max = ("", float('-inf'))
+        
         lo, hi = 0, len(vals) - 1
         while lo <= hi:
             mid = (lo + hi) // 2
