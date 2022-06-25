@@ -26,9 +26,6 @@ class TimeMap:
         [("", 1), ("", 3), ("", 7), ("", 8)]
                             h l m 
         """
-        if key not in self.store:
-            return ""
-        
         vals = self.store[key]
         cur_max = ("", float('-inf'))
         
