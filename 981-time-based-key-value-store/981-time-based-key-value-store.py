@@ -18,14 +18,36 @@ class TimeMap:
         if a timestamp like that doesn't exist (the given TS is earlier than any already set TS)
             return ""
         just loop backwards through the key's value array and return the first TS item that is <= timestamp?
+        
+        4
+        [("", 1), ("", 3), ("", 7), ("", 8)]
+                            h l m 
         """
         if key not in self.store:
             return ""
         
-        for value, ts in reversed(self.store[key]):
-            if ts <= timestamp:
-                return value
-        return ""
+        # for value, ts in reversed(self.store[key]):
+        #     if ts <= timestamp:
+        #         return value
+        
+        vals = self.store[key]
+        cur_max = ("", float('-inf'))
+        lo, hi = 0, len(vals) - 1
+        while lo <= hi:
+            mid = (lo + hi) // 2
+            val, ts = vals[mid]
+            
+            if ts < timestamp:
+                if ts > cur_max[1]:
+                    cur_max = (val, ts)
+                lo = mid + 1
+            elif ts > timestamp:
+                hi = mid - 1
+            else:
+                return val
+        
+        return cur_max[0]
+
             
 
 
