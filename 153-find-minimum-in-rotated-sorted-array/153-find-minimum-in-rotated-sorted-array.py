@@ -12,7 +12,6 @@ class Solution:
         [8,10,16,22]
         [10,16,22,8]
         [16,22,8,10]
-        
         """
         cur_min = float('inf')
         lo, hi = 0, len(nums) - 1
