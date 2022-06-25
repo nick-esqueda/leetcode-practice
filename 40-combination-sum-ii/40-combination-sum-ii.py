@@ -11,9 +11,8 @@ class Solution:
         """
         candidates.sort()
         all_combos = []
-        combo = []
         
-        def get_combs(i, target):
+        def get_combs(i, target, combo):
             if target == 0:
                 all_combos.append(combo[::])
                 return
@@ -24,14 +23,13 @@ class Solution:
             
             num = candidates[i]
             combo.append(num)
-            print(combo)
-            get_combs(i + 1, target - num)
+            get_combs(i + 1, target - num, combo)
             
             combo.pop()
             while i < len(candidates) and candidates[i] == num:
                 i += 1
-            get_combs(i, target)
+            get_combs(i, target, combo)
             return
         
-        get_combs(0, target)
+        get_combs(0, target, [])
         return all_combos
