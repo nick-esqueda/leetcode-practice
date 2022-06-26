@@ -7,6 +7,14 @@ class Twitter:
         """
         self.follows = defaultdict(set) # follower: set(followee, followee)
         self.tweets = [] 
+        self.feed_heaps = {} # follower: maxheap() (based off of tweetId)(assuming tweetId's come in increasing order)
+        
+        
+        """
+        build a heap for each individual FOLLWER, so that whenever a followee posts something, you put it inside
+            each follower's feed heap
+        any time you want the 10 most recent, you can just grab the first 10 elements from that user's heap 
+        """
 
     def postTweet(self, userId: int, tweetId: int) -> None:
         """
@@ -39,8 +47,7 @@ class Twitter:
         self.follows[followerId].add(followeeId)
 
     def unfollow(self, followerId: int, followeeId: int) -> None:
-        if followeeId in self.follows[followerId]:
-            self.follows[followerId].remove(followeeId)
+        self.follows[followerId].discard(followeeId)
 
 
 # Your Twitter object will be instantiated and called as such:
