@@ -61,12 +61,13 @@ class Solution:
         
         min_heap = []
         for k, ll in enumerate(lists):
-            if ll:
-                dummy = ListNode()
-                dummy.next = ll
-                lists[k] = dummy
-                val = ll_dq(lists[k])
-                min_heap.append((val, k))
+            if ll is None:
+                continue
+            dummy = ListNode()
+            dummy.next = ll
+            lists[k] = dummy
+            val = ll_dq(lists[k])
+            min_heap.append((val, k))
         heapq.heapify(min_heap)
             
         m_dummy = ListNode()
