@@ -10,18 +10,18 @@ class Solution:
         def is_palin(string):
             return string == string[::-1]
         
-        def get_partitions(string):
-            if len(string) == 0:
+        def get_partitions(i):
+            if i >= len(s):
                 all_partitions.append(partition[::])
                 return
             
-            for i in range(len(string)):
-                substr = string[0:i + 1]
+            for j in range(i, len(s)):
+                substr = s[i:j + 1]
                 if is_palin(substr):
                     partition.append(substr)
-                    get_partitions(string[i + 1:])
+                    get_partitions(j + 1)
                     partition.pop()
             
-        get_partitions(s)
+        get_partitions(0)
         return all_partitions
         
