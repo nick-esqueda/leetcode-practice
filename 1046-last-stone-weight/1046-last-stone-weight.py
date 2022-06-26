@@ -15,9 +15,8 @@ class Solution:
         while len(stones) > 1:
             s1 = heapq.heappop(stones)
             s2 = heapq.heappop(stones)
-            lighter, heavier = min(s1, s2), max(s1, s2)
-            crushed = heavier - lighter
-            if crushed > 0:
-                heapq.heappush(stones, crushed*-1)
+            crushed = s1 - s2
+            if crushed*-1 > 0:
+                heapq.heappush(stones, crushed)
         
         return stones[0]*-1 if stones else 0
