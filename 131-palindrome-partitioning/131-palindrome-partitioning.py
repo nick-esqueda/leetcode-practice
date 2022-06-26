@@ -7,9 +7,6 @@ class Solution:
         all_partitions = []
         partition = []
         
-        def is_palin(string):
-            return string == string[::-1]
-        
         def get_partitions(i):
             if i >= len(s):
                 all_partitions.append(partition[::])
@@ -17,11 +14,19 @@ class Solution:
             
             for j in range(i, len(s)):
                 substr = s[i:j + 1]
-                if is_palin(substr):
+                if self.is_palin(substr):
                     partition.append(substr)
                     get_partitions(j + 1)
                     partition.pop()
             
         get_partitions(0)
         return all_partitions
+    
+    def is_palin(self, s):
+        i, j = 0, len(s) - 1
+        while i < j:
+            if s[i] != s[j]:
+                return False
+            i, j = i + 1, j - 1
+        return True
         
