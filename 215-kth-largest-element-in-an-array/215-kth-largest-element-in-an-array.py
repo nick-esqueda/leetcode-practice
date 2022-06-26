@@ -5,5 +5,4 @@ class Solution:
         while k > 1:
             heapq.heappop(nums)
             k -= 1
-        
         return -heapq.heappop(nums)
