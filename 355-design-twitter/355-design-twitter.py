@@ -5,16 +5,8 @@ class Twitter:
         we want the tweets sorted in order of posted
         that way, we can just iterate through until we have 10 posts that have a userId that is in the user's following set
         """
-        self.follows = defaultdict(set) # follower: set(followee, followee)
+        self.follows = defaultdict(set) # follower: set(followee, followee, ...)
         self.tweets = [] 
-        self.feed_heaps = {} # follower: maxheap() (based off of tweetId)(assuming tweetId's come in increasing order)
-        
-        
-        """
-        build a heap for each individual FOLLWER, so that whenever a followee posts something, you put it inside
-            each follower's feed heap
-        any time you want the 10 most recent, you can just grab the first 10 elements from that user's heap 
-        """
 
     def postTweet(self, userId: int, tweetId: int) -> None:
         """
