@@ -23,7 +23,6 @@ class Solution:
                     return True
                 graph[node].append(nei)
                 itin.pop()
-            return False
         
         dft("JFK")
         return itin
