@@ -1,6 +1,7 @@
 class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         """
+        BUILDING THE ADJACENCY LIST:
         for each word in words, generate patterns by replacing a char with a wildcard - O(nm)
         map each pattern to that word (use a set as value)
         then, you'll have a adjlist/map with patterns as keys and all words that match that pattern as values
@@ -48,7 +49,6 @@ class Solution:
         vis = set(beginWord)
         while q:
             word, dist = q.popleft()
-            print(word)
             if word == endWord:
                 return dist
             for nei in adj[word]:
