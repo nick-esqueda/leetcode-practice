@@ -24,7 +24,7 @@ class Solution:
         heap = [(0, 0)]
         heapq.heapify(heap)
         vis = set()
-        while heap:
+        while len(vis) != len(points):
             weight, coord_idx = heapq.heappop(heap)
             
             if coord_idx not in vis:
