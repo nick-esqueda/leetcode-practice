@@ -10,13 +10,11 @@ class Solution:
             increment the total cost var
             calculate the weight to all of the other nodes and store inside tuple with node
             add all of those neighbors/weights to the heap
-            
-        TRY NOT STARTING AT I + 1 TO SEE IF TIMEOUT
         """
         adj = { i: [] for i in range(len(points)) }
         for i in range(len(points)):
             x1, y1 = points[i]
-            for j in range(len(points)):
+            for j in range(i + 1, len(points)):
                 x2, y2 = points[j]
                 dist = abs(x1 - x2) + abs(y1 - y2)
                 adj[i].append((dist, j))
@@ -28,11 +26,12 @@ class Solution:
         vis = set()
         while len(vis) < len(points):
             weight, coord_idx = heapq.heappop(heap)
-            
-            if coord_idx not in vis:
-                min_cost += weight
-                vis.add(coord_idx)
-                for nei in adj[coord_idx]:
+            if coord_idx in vis:
+                continue
+            min_cost += weight
+            vis.add(coord_idx)
+            for nei in adj[coord_idx]:
+                if nei not in vis:
                     heapq.heappush(heap, nei)
                     
         return min_cost
