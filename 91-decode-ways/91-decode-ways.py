@@ -25,7 +25,7 @@ class Solution:
             
             count = 0
             count += backtrack(i + 1, memo)
-            if (i < len(s) - 1 and 
+            if (i + 1 < len(s) and 
                 ((s[i] == "1") or (s[i] == "2" and s[i + 1] in valid_second))):
                 count += backtrack(i + 2, memo)
             
