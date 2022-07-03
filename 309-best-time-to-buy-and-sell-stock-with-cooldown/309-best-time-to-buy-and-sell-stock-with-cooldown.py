@@ -20,12 +20,10 @@ class Solution:
                 hold = backtrack(i + 1, False)
                 buy = backtrack(i + 1, True) - price
                 memo[key] = max(hold, buy)
-                return memo[key]
             elif bought:
                 hold = backtrack(i + 1, True)
                 sell = price + backtrack(i + 2, False)
                 memo[key] = max(hold, sell) 
-                return memo[key]
+            return memo[key]
             
-        
         return backtrack(0, False)
