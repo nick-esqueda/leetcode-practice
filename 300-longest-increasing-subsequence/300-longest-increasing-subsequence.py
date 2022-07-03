@@ -9,11 +9,9 @@ class Solution:
         rtn = 0
         for i in range(len(nums)-1, -1, -1):
             max_tab = 0
-            j = i
-            while j < len(nums):
+            for j in range(i + 1, len(nums)):
                 if nums[j] > nums[i]:
                     max_tab = max(tab[j], max_tab)
-                j += 1
             tab[i] = max(1, 1 + max_tab)
             rtn = max(tab[i], rtn)
         return rtn
