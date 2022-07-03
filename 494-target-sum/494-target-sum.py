@@ -16,10 +16,8 @@ class Solution:
                 return 1 if run_sum == target else 0 
             
             combos = 0
-            run_sum += nums[i]
-            combos += get_combos(i + 1, run_sum)
-            run_sum -= (nums[i] * 2)
-            combos += get_combos(i + 1, run_sum)
+            combos += get_combos(i + 1, run_sum + nums[i])
+            combos += get_combos(i + 1, run_sum - nums[i])
             
             memo[key] = combos
             return combos
