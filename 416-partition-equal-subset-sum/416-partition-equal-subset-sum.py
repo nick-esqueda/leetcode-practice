@@ -2,6 +2,24 @@ class Solution:
     def canPartition(self, nums: List[int]) -> bool:
         """
         """
+        if sum(nums) % 2:
+            return False
+        
+        target = sum(nums) // 2
+        sums = {0}
+        for num in nums:
+            temp_sums = sums.copy()
+            for s in temp_sums:
+                sums.add(num + s)
+            if target in sums:
+                return True
+        return False
+                
+        
+        
+    def canPartition_TOPDOWN(self, nums: List[int]) -> bool:
+        """
+        """
         if sum(nums) / 2 != sum(nums) // 2:
             return False
         target = sum(nums) // 2
