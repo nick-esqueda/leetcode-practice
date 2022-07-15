@@ -1,67 +1,42 @@
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
         """
-        the max of piles gets you the max k value 
-        in other words, if koko eats max(piles) / hour, she'll go through each pile once per hour, meaning k == len(piles)
-        but you don't want max, you want min
+        after deciding k, have to take up the whole hour even if there are bananas left, and continue eating the pile after the hour
+        this means that if there are less than k bananas, koko will sit there and wait for the hour after eating all the bananas
         
-        
-        koko can eat fast or slow (k) bananas/hr
-        you want to find the slowest ban/hr value
-        the max ban/hr value is always going to be the max of piles (max(piles))
-        
-        brute force:
-        you can try a k of 1 and try to go through each pile to see if you can get to the end
-            if not, you'll increment k and run through the whole array again
-        to do this, you divide piles[i] by k (ceil) to get the number of hours it would take to finish that pile
-        then you subtract that from 'h' and move on to the next pile and do the same
-        if you get to the end of the array and the amount of hours taken == h, that k value is correct
-        
-        [1 ... 11] using this k value, how many hours does it take to eat all bananas?
-        [3, 6, 7, 11] target = 8
-        
-        if you get an hours value greater than target (h)
-            you need to eat more bananas/hr
-            move lo up to mid + 1
-        if you get an hours value less than target:
-            you can eat less ban/hr
-            move hi down to mid - 1
+        can choose any k value from 1 (1 bph) up to the max pile in the array (could be 30bph)
+        for each k value, go through the piles array and calcuate how many hours it would take to eat all bananas
+            if the hours it would take is greater than h, need to choose a lower k value
+            if the hours it would take is less than h, need to choose a higher k value
             
-        PLAN:
-        make an inner func that will... [get_hours]
-            loop through the piles array
-                divide piles[i] by k (ceiling) to get an hour amount that it takes to eat all those banas
-                add that count to a running hour count
-            return the hour count at end
-            
-        make an integer array from 1 up to max(piles)
-        bin search through the integer array
-        you will use each integer as the k value
-        find the mid of the integer array, and throw it into the get_hours func
-        if get_hours returns something greater than h:
-            move lo up to mid + 1
-        if get_hours returns something less than h:
-            move hi down to mid - 1
-        if get_hours == h, return that k value
+        GET HOURS WITH K:
+        iterate through piles
+        divide the num by chosen k value, and take the ceil
+            - this is the how many hours it took to eat this pile
+        add that to a run sum
+        
+        
+        piles = [3,6,7,11], h = 8
+                 1 1 2 2
+        k = 6
+        
+        k value array [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                       0  1  2  3  4  5  6  7  8  9  10
         """
-        
-        def get_hours(k):
-            hours = 0
-            for pile in piles:
-                hours += math.ceil(pile / k)
-            return hours
-        
-        rtn = max(piles)
         lo, hi = 1, max(piles)
+        k = 0
         while lo <= hi:
-            k = (lo + hi) // 2
-            hours = get_hours(k)
-            
-            if hours > h:
-                lo = k + 1
-            elif hours <= h:
-                rtn = min(rtn, k)
-                hi = k - 1
-            
-        return rtn
+            mid = (lo + hi) // 2
+            cur_hours = self.get_hours(piles, mid)
+            if cur_hours <= h:
+                k = mid
+                hi = mid - 1
+            elif cur_hours > h:
+                lo = mid + 1
+        return k
         
+    def get_hours(self, piles, k):
+        total_h = 0
+        for bananas in piles:
+            total_h += math.ceil(bananas / k)
+        return total_h
