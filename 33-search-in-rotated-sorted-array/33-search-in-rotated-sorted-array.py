@@ -22,21 +22,21 @@ class Solution:
             if nums[l] <= nums[mid] <= nums[r]:
                 if target < nums[mid]:
                     r = mid - 1
-                elif target > nums[mid]:
+                else:
                     l = mid + 1
             
             # the split is to the left
             elif nums[l] > nums[mid]:
                 if target < nums[mid] or target >= nums[l]:
                     r = mid - 1
-                else: # this could be just else?
+                else:
                     l = mid + 1
                     
             # the split is to the right
             elif nums[r] < nums[mid]:
                 if target > nums[mid] or target <= nums[r]:
                     l = mid + 1
-                else: # this could be just else?
+                else:
                     r = mid - 1
                 
         return -1
