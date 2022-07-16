@@ -29,14 +29,14 @@ class Solution:
             elif nums[l] > nums[mid]:
                 if target < nums[mid] or target >= nums[l]:
                     r = mid - 1
-                elif target > nums[mid]: # this could be just else?
+                else: # this could be just else?
                     l = mid + 1
                     
             # the split is to the right
             elif nums[r] < nums[mid]:
                 if target > nums[mid] or target <= nums[r]:
                     l = mid + 1
-                elif target < nums[mid]: # this could be just else?
+                else: # this could be just else?
                     r = mid - 1
                 
         return -1
