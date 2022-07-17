@@ -6,7 +6,7 @@ class Solution:
         a more efficient way to do it would be to right shift once for every position to see if it &'s with 1 every time
         """
         count = 0
-        for i in range(32):
+        while n != 0:
             if n & 1:
                 count += 1
             n = n >> 1
