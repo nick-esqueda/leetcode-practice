@@ -20,8 +20,6 @@ class Solution:
         for i in range(1, n + 1):
             if offset * 2 == i:
                 offset *= 2
-                rtn.append(1)
-            else:
-                count = 1 + rtn[i - offset]
-                rtn.append(count)
+            count = 1 + rtn[i - offset]
+            rtn.append(count)
         return rtn
