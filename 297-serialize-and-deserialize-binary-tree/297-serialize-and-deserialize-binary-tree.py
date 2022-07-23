@@ -18,7 +18,7 @@ class Codec:
         serialized = []
         def dfs(root):
             if not root:
-                serialized.append('null')
+                serialized.append('N')
                 return
             
             serialized.append(f"{root.val}")
@@ -51,7 +51,7 @@ class Codec:
         left child = i*2 + 1
         right child = i*2 + 2
         """
-        if len(data) == 0 or data[0] == "n":
+        if len(data) == 0:
             return
         
         data = data.split(',')
@@ -59,7 +59,7 @@ class Codec:
         def build_tree(i):
             if i == len(data):
                 return None
-            if data[i] == "null":
+            if data[i] == "N":
                 data.pop(0)
                 return None
             
