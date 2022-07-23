@@ -25,21 +25,18 @@ class Solution:
         """
         
         mps = float('-inf')
-        
         def find_max_path(root):
             nonlocal mps
             if not root:
                 return 0
             
-            left_no_split = find_max_path(root.left)
-            right_no_split = find_max_path(root.right)
-            left_no_split = max(left_no_split, 0)
-            right_no_split = max(right_no_split, 0)
+            left_no_split = max(find_max_path(root.left), 0)
+            right_no_split = max(find_max_path(root.right), 0)
             
             cur_no_split = root.val + max(left_no_split, right_no_split)
-            
             full_path = left_no_split + root.val + right_no_split
             
+            print(mps)
             mps = max(mps, full_path)
             return cur_no_split
         
