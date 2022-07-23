@@ -1,5 +1,29 @@
 class Solution:
     def checkValidString(self, s: str) -> bool:
+        """
+        two variable to keep track of the range of VALID possibilites
+        one var will always choose ) for wildcards, the other will choose (
+        if the one choosing ( ever goes negative, return false from the whole func
+        if ) goes negative, reset back to 0, because you could have just left that to be ""
+        if 0 is in the range created from the two vars, return true
+        """
+        conservative, liberal = 0, 0
+        for c in s:
+            if c == ")":
+                conservative, liberal = conservative - 1, liberal - 1
+            elif c == "(":
+                conservative, liberal = conservative + 1, liberal + 1
+            else: # wildcard
+                conservative, liberal = conservative - 1, liberal + 1
+            
+            if conservative < 0:
+                conservative = 0
+            if liberal < 0:
+                return False
+            
+        return 0 in range(conservative, liberal + 1)
+    
+    def checkValidString_TOPDOWN(self, s: str) -> bool:
         memo = {}
         def backtrack(i, open_left):
             key = (i, open_left)
