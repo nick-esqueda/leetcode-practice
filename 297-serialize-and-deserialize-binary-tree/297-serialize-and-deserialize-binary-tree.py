@@ -55,8 +55,9 @@ class Codec:
             return
         
         data = data.split(',')
-        
-        def build_tree(i):
+        i = 0
+        def build_tree():
+            nonlocal i
             if i == len(data):
                 return None
             if data[i] == "N":
@@ -64,12 +65,12 @@ class Codec:
                 return None
             
             root = TreeNode(int(data[i]))
-            data.pop(0)
-            root.left = build_tree(i)
-            root.right = build_tree(i)
+            i += 1
+            root.left = build_tree()
+            root.right = build_tree()
             return root
         
-        return build_tree(0)
+        return build_tree()
         
 
 # Your Codec object will be instantiated and called as such:
