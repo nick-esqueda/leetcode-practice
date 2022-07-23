@@ -36,9 +36,8 @@ class Solution:
             cur_no_split = root.val + max(left_no_split, right_no_split)
             full_path = left_no_split + root.val + right_no_split
             
-            print(mps)
             mps = max(mps, full_path)
             return cur_no_split
         
-        root_no_split = find_max_path(root)
-        return max(mps, root_no_split)
+        find_max_path(root)
+        return mps
