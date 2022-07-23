@@ -10,11 +10,14 @@ class Solution:
         conservative, liberal = 0, 0
         for c in s:
             if c == ")":
-                conservative, liberal = conservative - 1, liberal - 1
+                conservative -= 1
+                liberal -= 1
             elif c == "(":
-                conservative, liberal = conservative + 1, liberal + 1
+                conservative += 1
+                liberal += 1
             else: # wildcard
-                conservative, liberal = conservative - 1, liberal + 1
+                conservative -= 1
+                liberal += 1
             
             if conservative < 0:
                 conservative = 0
@@ -22,6 +25,7 @@ class Solution:
                 return False
             
         return 0 in range(conservative, liberal + 1)
+    
     
     def checkValidString_TOPDOWN(self, s: str) -> bool:
         memo = {}
