@@ -4,14 +4,14 @@ class Solution:
         node_costs = [float('inf')] * n
         node_costs[k] = 0
         for _ in range(n - 1):
-            changes = 0
+            updated = False
             for node, nei, edge_cost in time:
                 node, nei = node - 1, nei - 1 # to convert to 0 indexing
-                
                 if node_costs[node] + edge_cost < node_costs[nei]:
-                    changes += 1
+                    updated = True
                     node_costs[nei] = node_costs[node] + edge_cost
-            if not changes:
+                    
+            if not updated:
                 break
                 
         max_cost = 0
