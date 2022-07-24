@@ -1,5 +1,28 @@
 class Solution:
-    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+    def networkDelayTime(self, time: List[List[int]], n: int, k: int) -> int:
+        k -= 1
+        node_costs = [float('inf')] * n
+        node_costs[k] = 0
+        for _ in range(n - 1):
+            changes = 0
+            for node, nei, edge_cost in time:
+                node, nei = node - 1, nei - 1 # to convert to 0 indexing
+                
+                if node_costs[node] + edge_cost < node_costs[nei]:
+                    changes += 1
+                    node_costs[nei] = node_costs[node] + edge_cost
+            if not changes:
+                break
+                
+        max_cost = 0
+        for cost in node_costs:
+            if cost == float('inf'):
+                return -1
+            max_cost = max(max_cost, cost)
+        return max_cost
+    
+    
+    def networkDelayTime_DIJKSTRA(self, times: List[List[int]], n: int, k: int) -> int:
         """
         [(src_node, target_node, time/weight), (src_node, target_node, time/weight), ...]
         need to construct adj list from times
