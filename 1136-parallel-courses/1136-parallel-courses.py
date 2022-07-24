@@ -19,18 +19,18 @@ class Solution:
                 q.append(course)
                
         sems = 0
-        vis = set()
+        count = 0
         while q:
             sems += 1
             for _ in range(len(q)):
                 course = q.popleft()
-                vis.add(course)
+                count += 1
                 for child in adj[course]:
                     in_degree[child] -= 1
                     if in_degree[child] == 0:
                         q.append(child)
             
-        return sems if len(vis) == n else -1
+        return sems if count == n else -1
             
         
         
