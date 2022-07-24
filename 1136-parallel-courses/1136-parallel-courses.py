@@ -13,7 +13,7 @@ class Solution:
             adj[a].append(b)
             in_degree[b] += 1
             
-        q = []
+        q = deque()
         for course in adj:
             if in_degree[course] == 0:
                 q.append(course)
@@ -22,14 +22,13 @@ class Solution:
         vis = set()
         while q:
             sems += 1
-            new_q = []
-            for course in q:
+            for _ in range(len(q)):
+                course = q.popleft()
                 vis.add(course)
                 for child in adj[course]:
                     in_degree[child] -= 1
                     if in_degree[child] == 0:
-                        new_q.append(child)
-            q = new_q
+                        q.append(child)
             
         return sems if len(vis) == n else -1
             
