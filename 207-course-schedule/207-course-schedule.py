@@ -1,46 +1,32 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
         """
-        create adj list from prereqs
-        declare can_finish var = True
-        for each course in adj list, IF that course has prereqs, perform a DFS to see if canFinish
-          (pass in a new visited set on each call)
-          if any call returns false, return False from whole func
-        at very end, return True
-        
-        DFS:
-          if the course is already in the visited set, return false
-          add course to visited set
-          for each neighbor/prereq
-            if not canFinish, return false
-          set prereq list to empty if you haven't returned false yet
-          return true at end of func (this means that you canFinish all courses leading up to this course)
+        the only way you cannot finish the courses is if there is a cycle
+        build the adj list
+        dfs over every node with a path and processed set - if you come across a node in the path set, there's a cycle
         """
-        graph = {}
-        for course, prereq in prerequisites:
-          if course not in graph: graph[course] = []
-          if prereq not in graph: graph[prereq] = []
-          graph[course].append(prereq)
-          
-        def dft(course, visited):
-          if graph[course] == []:
-            return True
-          if course in visited:
-            return False
-          
-          visited.add(course)
-          for prereq in graph[course]:
-            if dft(prereq, visited) is False:
-              return False
-          
-          graph[course] = []
-          return True
-          
-        for course in graph:
-          if graph[course]:
-            if dft(course, set()) is False:
-              return False
+        
+        adj = { i: [] for i in range(numCourses) }
+        for a, b in prerequisites:
+            adj[a].append(b)
             
+            
+        def detect_cycle(node: int, path: set) -> bool:
+            if node in done:
+                return False
+            if node in path:
+                return True
+            
+            path.add(node)
+            for nei in adj[node]:
+                if detect_cycle(nei, path):
+                    return True
+            path.remove(node)
+            done.add(node)
+            
+        done = set()
+        for course in adj:
+            if detect_cycle(course, set()):
+                return False
         return True
-            
-          
+        
