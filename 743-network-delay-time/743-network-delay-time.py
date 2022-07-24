@@ -24,22 +24,21 @@ class Solution:
         we also can just break out of the loop when the heap becomes empty
         the heap will only ever become empty once you've been to every node (i think?)
         """
+        # adj = defaultdict(list)
         adj = { src: [] for src in range(1, n + 1) }
         for src, dst, time in times:
             adj[src].append((time, dst))
             
         max_time = 0
-        heap = [(0, k)]
         vis = set()
-        heapq.heapify(heap)
+        heap = [(0, k)]
         while heap:
             time, node = heapq.heappop(heap)
             if node in vis:
                 continue
-            max_time = max(max_time, time)
             vis.add(node)
-            for nei in adj[node]:
-                nei_time, nei_node = nei
+            max_time = max(max_time, time)
+            for nei_time, nei_node in adj[node]:
                 if nei_node not in vis:
                     heapq.heappush(heap, (time + nei_time, nei_node))
         return max_time if len(vis) == n else -1
