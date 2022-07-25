@@ -9,8 +9,7 @@ class Solution:
             adj[u].append((succProb[i], v))
             adj[v].append((succProb[i], u))
         
-        print(adj)
-        
+
         vis = set()
         pq = [(-1.0, start)] # want the max path - max heap instead of min heap
         while pq:
@@ -25,4 +24,5 @@ class Solution:
             for nei_wgt, nei in adj[node]:
                 if nei not in vis:
                     heapq.heappush(pq, (-abs(nei_wgt * wgt), nei))
+                    
         return 0
