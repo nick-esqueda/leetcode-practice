@@ -14,8 +14,6 @@ class Solution:
         pq = [(-1.0, start)] # want the max path - max heap instead of min heap
         while pq:
             wgt, node = heapq.heappop(pq)
-            if node in vis:
-                continue
                 
             vis.add(node)
             if node == end:
