@@ -6,6 +6,25 @@
 #         self.right = right
 class Solution:
     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        """
+        """
+        if not root:
+            return None
+        
+        post = []
+        sta = [root]
+        while sta:
+            cur = sta.pop()
+            post.append(cur.val)
+            if cur.left:
+                sta.append(cur.left)
+            if cur.right:
+                sta.append(cur.right)
+        
+        return post[::-1]
+    
+    
+    def postorderTraversal_RECURSIVE(self, root: Optional[TreeNode]) -> List[int]:
         post = []
         def dfs(root):
             if not root:
