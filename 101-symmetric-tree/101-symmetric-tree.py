@@ -28,5 +28,4 @@ class Solution:
         
         left_pre(root.left)
         right_pre(root.right)
-        print(left, right)
         return left == right
