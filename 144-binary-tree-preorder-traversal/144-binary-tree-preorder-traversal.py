@@ -7,8 +7,8 @@
 class Solution:
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         pre = []
-        cur = root
         sta = []
+        cur = root
         while sta or cur:
             if cur:
                 pre.append(cur.val)
