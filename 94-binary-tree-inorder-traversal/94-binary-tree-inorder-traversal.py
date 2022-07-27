@@ -6,9 +6,6 @@
 #         self.right = right
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        """
-        once you're all the way down the left (no more lefts), you want to push to inorder, then pop back up to par
-        """
         inorder = []
         sta = []
         cur = root
