@@ -10,28 +10,13 @@ class Solution(object):
         :type root: TreeNode
         :rtype: TreeNode
         """
-        """
-        create a queue with the root node inside of it
-        while the queue has nodes still on it...
-        pop the first node in queue
-        save the original root.left and root.right
-        reassign root.left to root.right and vice versa
-        if they exist, push each left and right children of the node to the queue
-        keep looping
-        return the root
-        """
+        if root is None:
+            return None
         
-        if not root: return root
+        temp = root.left
+        root.left = root.right
+        root.right = temp
         
-        q = [root]
-        while q:
-          node = q.pop(0)
-          
-          oldLeft = node.left
-          node.left = node.right
-          node.right = oldLeft
-          
-          if node.left: q.append(node.left)
-          if node.right: q.append(node.right)
+        self.invertTree(root.left)
+        self.invertTree(root.right)
         return root
-        
