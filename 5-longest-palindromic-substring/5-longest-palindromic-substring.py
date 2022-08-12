@@ -1,37 +1,40 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
-        """
-        to see if something is a palindrome, you can start from the 'middle' (i) and spread outwards, checking if both chars are same
-        you will do this for every char
-        *this will only work for odd lengths of s
-        for even lengths of s:
-        take groups of two and spread outwards in the same manner
-        always be keeping track of a maximum
-        """
-        pali_idx = (0, 0)
+        def pali_len(l, r):
+            pali_len = 0
+            while (l >= 0 and r < len(s)) and (s[l] == s[r]):
+                pali_len = r - l + 1
+                l, r = l - 1, r + 1
+            return (l + 1, r - 1)
         
-        # odds
+        
+        longest = 0, 0
+        # EVENS
         for i in range(len(s)):
-            pi, pj = self.get_pali(s, i)
-            pali_idx = (pi, pj) if pj - pi > pali_idx[1] - pali_idx[0] else pali_idx
+            l, r = pali_len(i, i)
+            if (r - l + 1) > (longest[1] - longest[0] + 1):
+                longest = l, r
         
-        # evens
+        # ODDS
+        for i in range(len(s) - 1):
+            l, r = pali_len(i, i + 1)
+            if (r - l + 1) > (longest[1] - longest[0] + 1):
+                longest = l, r
+        
+        l, r = longest
+        return s[l:r + 1]
+            
+        
+    
+    def longestPalindrome_BRUTE_FORCE(self, s: str) -> str:
+        def is_pali(ss):
+            return ss == ss[::-1]
+        
+        longest = ""
         for i in range(len(s)):
-            j = i + 1
-            pi, pj = self.get_pali(s, (i, j))
-            pali_idx = (pi, pj) if pj - pi > pali_idx[1] - pali_idx[0] else pali_idx
+            for j in range(i, len(s)):
+                if is_pali(s[i:j + 1]) and j - i > len(longest):
+                    longest = s[i:j + 1]
+                    
+        return longest
         
-        i, j = pali_idx
-        return s[i:j + 1]
-        
-        
-    def get_pali(self, s, mid):
-        i, j = mid if isinstance(mid, tuple) else (mid, mid)
-        
-        while i >= 0 and j < len(s):
-            if s[i] == s[j]:
-                i, j = i - 1, j + 1
-            else:
-                break
-        i, j = i + 1, j - 1
-        return i, j
