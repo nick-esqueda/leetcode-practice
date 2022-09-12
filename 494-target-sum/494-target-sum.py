@@ -1,25 +1,21 @@
 class Solution:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
         """
-        mult by -1 to get the inverse
-        can choose to multiply by -1 for this num or leave it
-        after you get to the end of nums, sum all of those up and check against target
-        if the sum == target, return 1 since you found a way to hit target
-        return the sum of the different decisions
+        number of ways - DP
+        topdown memoization, returning 1 for each new way and 0 if not a way
         """
+        
         memo = {}
-        def get_combos(i, run_sum):
-            key = (i, run_sum)
+        def get_ways(i, total):
+            key = (i, total)
             if key in memo:
                 return memo[key]
             if i >= len(nums):
-                return 1 if run_sum == target else 0 
+                return 1 if total == target else 0
             
-            combos = 0
-            combos += get_combos(i + 1, run_sum + nums[i])
-            combos += get_combos(i + 1, run_sum - nums[i])
-            
-            memo[key] = combos
-            return combos
+            ways = (get_ways(i + 1, total + nums[i]) + 
+                    get_ways(i + 1, total - nums[i]))
+            memo[key] = ways
+            return ways
         
-        return get_combos(0, 0)
+        return get_ways(0, 0)
