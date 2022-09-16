@@ -11,11 +11,9 @@ class Solution:
             return cost[0]
         
         tab = [float('inf')] * len(cost)
-        tab[-1], tab[-2] = cost[-1], cost[-2]
-        
         for i in range(len(cost) - 3, -1, -1):
-            tab[i] = cost[i] + min(tab[i + 1], tab[i + 2])
-        return min(tab[0], tab[1])
+            cost[i] = cost[i] + min(cost[i + 1], cost[i + 2])
+        return min(cost[0], cost[1])
         
     
     def minCostClimbingStairs_TOPDOWN(self, cost: List[int]) -> int:
