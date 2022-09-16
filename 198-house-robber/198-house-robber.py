@@ -1,6 +1,22 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
         """
+        same as topdown, but starting at the beginning of the array by the base cases and iterating.
+        RECURRENCE RELATION:
+            dp[i] = max(dp[i - 2] + nums[i], dp[i - 1])
+        """
+        if len(nums) == 1:
+            return nums[0]
+        
+        nums[1] = max(nums[0], nums[1])
+        for i in range(2, len(nums)):
+            nums[i] = max(nums[i - 2] + nums[i], nums[i - 1])
+        return nums[-1]
+        
+    
+    
+    def rob_TOPDOWN(self, nums: List[int]) -> int:
+        """
         is this a DP problem? yes, want to find the max of something based on decisions.
         subproblems:
             what is the max amount i can rob, up to and including this current house?
@@ -26,7 +42,7 @@ class Solution:
             if i == 1:
                 return max(nums[0], nums[1])
             if i not in memo:
-                memo[i] = max(dp(i - 2) + nums[i], dp(i - 1))
+                memo[i] = max(dp(i - 2) + nums[i], dp(i - 1)) # recurrence relation
             return memo[i]
         
         return dp(len(nums) - 1)
