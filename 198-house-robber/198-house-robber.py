@@ -1,20 +1,32 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
         """
-        [21, 21, 1, 1, 22]
-         i
-         
-        each tab index will be the max of either -
-            > the position right after the curr index
-            > the sum of the num at this index + the num at i + 2
+        is this a DP problem? yes, want to find the max of something based on decisions.
+        subproblems:
+            what is the max amount i can rob, up to and including this current house?
+            MAIN PROBLEM: what is the max amount you can rob up to and including the last house/index?
+        overlapping subproblems: 
+            you might want to know the max amount you can rob up to a particular index multiple times
+        optimal substructure:
+            the max amount you can rob for the whole array relies on the max amount you can rob at each house.
+        base cases:
+            at house 0, the max you can rob is that number.
+            at house 1, the max you can rob is the max of the 0th or 1st amounts;
+        RECURRENCE RELATION:
+            the max amount that i could rob up to and including this house is either:
+                the max you could rob up to 2 houses ago + this house
+                - or -
+                just the amount you could rob at the previous house (and not including this house).
+            dp[i] = max(dp[i - 2] + nums[i], dp[i - 1]) 
         """
-        if len(nums) <= 2:
-            return max(nums)
+        memo = {}
+        def dp(i):
+            if i == 0:
+                return nums[0]
+            if i == 1:
+                return max(nums[0], nums[1])
+            if i not in memo:
+                memo[i] = max(dp(i - 2) + nums[i], dp(i - 1))
+            return memo[i]
         
-        nums[-2] = max(nums[-2], nums[-1])        
-        for i in range(len(nums) - 3, -1, -1):
-            nums[i] = max(nums[i + 1],
-                          nums[i] + nums[i + 2])
-            
-        return nums[0]
-        
+        return dp(len(nums) - 1)
