@@ -3,27 +3,17 @@ class Solution:
         """
         dp(i, left) = max((mult[i] * nums[left]) + dp(i + 1, left + 1), (mult[i] * nums[left]) + dp(i + 1, left))
         """
-#         nums_len, mults_len = len(nums), len(multipliers)
-#         tab = [[0] * (nums_len + 1) for _ in range(mults_len + 1)]
+        nums_len, mults_len = len(nums), len(multipliers)
+        tab = [[0] * (mults_len + 1) for _ in range(mults_len + 1)] # must use 'm' for both lengths since left can only be as high as m.
         
-#         for i in range(mults_len - 1, -1, -1): # base case happens at i == m.
-#             for left in range(i, -1, -1): # left can only be as high as the number of multipliers used.
-#                 mult = multipliers[i]
-#                 right = (nums_len - 1) - (i - left)
-#                 tab[i][left] = max((mult * nums[left]) + tab[i + 1][left + 1],
-#                                    (mult * nums[right]) + tab[i + 1][left])
-#         return tab[0][0]
-
-        n, m = len(nums), len(multipliers)
-        dp = [[0] * (m + 1) for _ in range(m + 1)]
-        
-        for i in range(m - 1, -1, -1):
-            for left in range(i, -1, -1):
+        for i in range(mults_len - 1, -1, -1): # base case happens at i == m.
+            for left in range(i, -1, -1): # left can only be as high as the number of multipliers used.
                 mult = multipliers[i]
-                right = n - 1 - (i - left)
-                dp[i][left] = max(mult * nums[left] + dp[i + 1][left + 1], 
-                                  mult * nums[right] + dp[i + 1][left])        
-        return dp[0][0]
+                right = (nums_len - 1) - (i - left)
+                tab[i][left] = max((mult * nums[left]) + tab[i + 1][left + 1],
+                                   (mult * nums[right]) + tab[i + 1][left])
+        return tab[0][0]
+
         
         
     def maximumScore_TOPDOWN(self, nums: List[int], multipliers: List[int]) -> int:
