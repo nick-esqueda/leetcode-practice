@@ -14,11 +14,12 @@ class Solution:
         
         points = { i: 0 for i in range(M + 1) }
         for num in nums:
-            # calculate the number of points if you took every one of those point values.
+            # pre-calculate the number of points if you took every one of those point values.
             points[num] += num
             
-        tab = [None] * (M + 1)
-        tab[0], tab[1] = 0, points[1]
+        tab = [0] * (M + 1)
+        tab[1] = points[1]
+        
         for i in range(2, M + 1):
             tab[i] = max(tab[i - 1], points[i] + tab[i - 2])
         
