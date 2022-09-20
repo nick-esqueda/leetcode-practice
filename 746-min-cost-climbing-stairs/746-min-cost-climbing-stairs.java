@@ -33,8 +33,8 @@ class Solution {
             why do i not have to take the min of i=0 and i=1 again...?
         */
         
-        return minCostTopDown(cost, cost.length);
-        // return minCostBottomUp(cost);
+        // return minCostTopDown(cost, cost.length);
+        return minCostBottomUp(cost);
     }
     
     public int minCostTopDown(int[] cost, int topIndex) {
