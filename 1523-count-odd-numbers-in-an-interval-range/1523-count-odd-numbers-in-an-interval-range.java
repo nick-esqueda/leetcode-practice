@@ -13,8 +13,6 @@ class Solution {
             10, 16 -> 3 -> hi - low // 2
         */
         int count = (high - low) / 2;
-        
-        if ((low & 1) == 0 && (high & 1) == 0) return count;
-        else return count + 1;
+        return ((low & 1) == 0 && (high & 1) == 0) ? count : count + 1;
     }
 }
