@@ -1,5 +1,55 @@
 class Solution {
     public boolean canMakeArithmeticProgression(int[] arr) {
+        // return sorting(arr);
+        return math(arr);
+    }
+        
+    public boolean math(int[] arr) {
+        /*
+            with the max and min of arr, you can predict what size the arith prog would be.
+            > (max - min) / (arr.length - 1) (-1 because we want the differences/edges between)
+            with that diff, you can simulate what values would be the proper arith prog.
+            put these nums in a set,
+            loop through arr,
+            if you find a number that is not in the set, then it didn't follow the arith prog.
+            if num is in set, remove it (this helps keep track of duplicates),
+            at the end, if there are nums still in set, return false else true.
+            
+            edge cases: 
+            is there a possibility (max-min)/(length - 1) (arith prog diff) will be a decimal?
+                > no, because if it was a decimal, then some nums in the arr would also be.
+        */
+        
+        int min=Integer.MAX_VALUE, max=Integer.MIN_VALUE;
+        Set<Integer> arrNums = new HashSet<>();
+        for (int num: arr) {
+            min = Math.min(min, num);
+            max = Math.max(max, num);
+            arrNums.add(num);
+        }
+        
+        // return false if an arith prog is not possible with integers.
+        if ((max - min) % (arr.length - 1) != 0) return false;
+        
+        int arithDiff = (max - min) / (arr.length - 1);
+        
+        // iterate through the proper prog, and check set to see if matches.
+        // for (int i = min; i <= max; i += arithDiff) { // this will not work when min == max
+        //     if (!(arrNums.contains(i))) return false;
+        // }
+        
+        int i = 0;
+        while (i < arr.length) {
+            // start at min, and work your way up the progression with min.
+            if (!(arrNums.contains(min))) return false;
+            min += arithDiff;
+            ++i;
+        }
+        
+        return true;
+    }
+        
+    public boolean sorting(int[] arr) {
         /*
             artith prog - difference between two adjacent elements are the same.
                 ex. 2, 4, 6 -> all have diff of 2
