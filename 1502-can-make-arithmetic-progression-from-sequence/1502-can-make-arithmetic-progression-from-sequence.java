@@ -7,17 +7,17 @@ class Solution {
     public boolean math(int[] arr) {
         /*
             with the max and min of arr, you can predict what size the arith prog would be.
-            > (max - min) / (arr.length - 1) (-1 because we want the differences/edges between)
+                > (max - min) / (arr.length - 1) (-1 because we want the differences/edges between)
             with that diff, you can simulate what values would be the proper arith prog.
-            put these nums in a set,
-            loop through arr,
-            if you find a number that is not in the set, then it didn't follow the arith prog.
-            if num is in set, remove it (this helps keep track of duplicates),
-            at the end, if there are nums still in set, return false else true.
+            put the nums in the arr in a set,
+            loop through what the arith prog should be,
+            if the curr num is not in the set, then that num doesn't belong.
+            return true at end if you made it through the prog.
             
             edge cases: 
             is there a possibility (max-min)/(length - 1) (arith prog diff) will be a decimal?
                 > no, because if it was a decimal, then some nums in the arr would also be.
+                > this is an indicator that the prog is not possible, period.
         */
         
         int min=Integer.MAX_VALUE, max=Integer.MIN_VALUE;
@@ -28,7 +28,7 @@ class Solution {
             arrNums.add(num);
         }
         
-        // return false if an arith prog is not possible with integers.
+        // return false if an arith prog is not possible with integers. (doesn't divide evenly)
         if ((max - min) % (arr.length - 1) != 0) return false;
         
         int arithDiff = (max - min) / (arr.length - 1);
