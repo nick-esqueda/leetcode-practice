@@ -9,14 +9,14 @@ class Solution {
             return -1 if no valid points
         */
         
-        int minDist = Integer.MAX_VALUE;
         int minIdx = 0;
+        int minDist = Integer.MAX_VALUE;
+        
         for (int i = 0; i < points.length; ++i) {
             int x2=points[i][0], y2=points[i][1];
             if ((x2 != x) && (y2 != y)) continue;
             
             int dist = Math.abs(x - x2) + Math.abs(y - y2);
-            
             if (dist < minDist) {
                 minIdx = i;
                 minDist = dist;
