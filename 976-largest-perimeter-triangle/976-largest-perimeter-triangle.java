@@ -11,8 +11,8 @@ class Solution {
         List<Integer> list = new ArrayList<>();
         for (int num : nums) list.add(num);
         
-        Collections.sort(list);
-        Collections.reverse(list);
+        Collections.sort(list, Collections.reverseOrder());
+        // Collections.reverse(list);
         
         System.out.println(list);
         
