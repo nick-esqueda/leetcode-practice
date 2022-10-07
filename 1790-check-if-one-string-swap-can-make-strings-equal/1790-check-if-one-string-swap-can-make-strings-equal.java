@@ -16,14 +16,9 @@ class Solution {
             char c1=s1.charAt(i), c2=s2.charAt(i);
             if (c1 == c2) continue;
 
-            if (diff1 == -1) {
-                diff1 = i;
-            } else if (diff2 == -1) {
-                diff2 = i;
-            } else {
-                // more than 2 differences
-                return false;
-            }
+            if (diff1 == -1) diff1 = i;
+            else if (diff2 == -1) diff2 = i;
+            else return false; // more than 2 differences
         }
         
         if (diff1 == -1 && diff2 == -1) return true;
