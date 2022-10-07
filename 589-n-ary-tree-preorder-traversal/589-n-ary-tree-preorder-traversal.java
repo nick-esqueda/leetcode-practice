@@ -22,14 +22,29 @@ class Solution {
         List<Integer> preOrder = new ArrayList<>();
         if (root == null) return preOrder;
         
-        getPreOrder(root, preOrder);
+        // getPreOrderRecursive(root, preOrder);
+        getPreOrderIterative(root, preOrder);
         return preOrder;
     }
     
-    public void getPreOrder(Node root, List<Integer> ordering) {
+    public void getPreOrderIterative(Node root, List<Integer> ordering) {
+        Deque<Node> stack = new ArrayDeque<>();
+        stack.push(root);
+        
+        while (!stack.isEmpty()) {
+            Node curr = stack.pop();
+            ordering.add(curr.val);
+            
+            for (int i = curr.children.size() - 1; i >= 0; --i) {
+                stack.push(curr.children.get(i));
+            }
+        }
+    }
+    
+    public void getPreOrderRecursive(Node root, List<Integer> ordering) {
         ordering.add(root.val);
-        for (Node nei: root.children) {
-            getPreOrder(nei, ordering);
+        for (Node child: root.children) {
+            getPreOrderRecursive(child, ordering);
         }
     }
 }
