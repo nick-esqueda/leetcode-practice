@@ -11,7 +11,6 @@ class Solution {
         
         // { num: freq, ... }
         Map<Integer, Integer> counts = new HashMap<>(); 
-        
         for (int num: nums) {
             if (counts.containsKey(num)) {
                 counts.replace(num, counts.get(num) + 1);
