@@ -10,9 +10,8 @@ class Solution {
         for (int i = 0; i < nums.length; ++i) {
             int compliment = target - nums[i];
             
-            if (compliments.containsKey(compliment)) {
+            if (compliments.containsKey(compliment))
                 return new int[] { i, compliments.get(compliment) };
-            }
             
             compliments.put(nums[i], i);
         }
