@@ -1,7 +1,8 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
+        return sorting(s, t);
         // return mapCounter(s, t);
-        return arrayCounter(s, t);
+        // return arrayCounter(s, t);
     }
     
     public boolean arrayCounter(String s, String t) {
@@ -45,5 +46,15 @@ class Solution {
         }
         
         return sCounts.equals(tCounts);
+    }
+    
+    public boolean sorting(String s, String t) {
+        char[] sArr = s.toCharArray();
+        char[] tArr = t.toCharArray();
+        
+        Arrays.sort(sArr);
+        Arrays.sort(tArr);
+        
+        return Arrays.equals(sArr, tArr);
     }
 }
