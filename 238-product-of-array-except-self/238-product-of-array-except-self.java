@@ -1,10 +1,10 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
         // return bruteForce(nums);
-        return something(nums);
+        return leftRight(nums);
     }
     
-    public int[] something(int[] nums) {
+    public int[] leftRight(int[] nums) {
         /*
             the product of all but curr num is the same as the
             product of all to the left and all to the right of curr.
