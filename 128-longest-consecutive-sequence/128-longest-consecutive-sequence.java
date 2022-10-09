@@ -13,18 +13,18 @@ class Solution {
         
         int maxCount = 1;
         for (int num : set) {
-            // only if this num is the start of a sequence...
-            if (!set.contains(num - 1)) { 
-                // go through the sequence and keep count.
-                int currNum = num;
-                int count = 1;
-                while (set.contains(currNum + 1)) { 
-                    count++; 
-                    currNum++;
-                }
-                
-                maxCount = Math.max(maxCount, count);
+            // ignore if this num isn't the start of a sequence.
+            if (set.contains(num - 1)) continue;
+            
+            // go through the sequence and keep count.
+            int currNum = num;
+            int count = 1;
+            while (set.contains(currNum + 1)) { 
+                count++; 
+                currNum++;
             }
+
+            maxCount = Math.max(maxCount, count);
         }
         
         return maxCount;
