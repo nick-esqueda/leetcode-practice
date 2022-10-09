@@ -3,6 +3,7 @@ class Solution {
         if (nums.length <= 1) return nums.length;
         
         // return bruteForce(nums);
+        // return sorting(nums);
         return setSequence(nums);
     }
     
@@ -11,7 +12,7 @@ class Solution {
         for (int num: nums) set.add(num);
         
         int maxCount = 1;
-        for (int num: set) {
+        for (int num : set) {
             // only if this num is the start of a sequence...
             if (!set.contains(num - 1)) { 
                 // go through the sequence and keep count.
@@ -29,7 +30,7 @@ class Solution {
         return maxCount;
     }
     
-    public int bruteForce(int[] nums) {
+    public int sorting(int[] nums) {
         Arrays.sort(nums);
         
         int maxCount = 1;
@@ -43,6 +44,25 @@ class Solution {
             } else {
                 count = 1;  
             } 
+        }
+        
+        return maxCount;
+    }
+    
+    public int bruteForce(int[] nums) {       
+        List<Integer> numsList = new ArrayList<>();
+        for (int num : nums) numsList.add(num);
+        
+        int maxCount = 1;
+        for (int num : nums) {
+            int count = 1;
+            int currNum = num;
+            while (numsList.contains(currNum + 1)) {
+                count += 1;
+                currNum += 1;
+            }
+            
+            maxCount = Math.max(maxCount, count);
         }
         
         return maxCount;
