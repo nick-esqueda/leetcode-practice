@@ -7,7 +7,6 @@ class Solution {
     
     public int bruteForce(int[] nums) {
         Arrays.sort(nums);
-        System.out.println(Arrays.toString(nums));
         
         int maxCount = 1;
         int count = 1;
