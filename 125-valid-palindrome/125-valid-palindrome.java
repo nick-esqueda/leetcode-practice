@@ -1,5 +1,9 @@
 class Solution {
     public boolean isPalindrome(String s) {
+        return twoPointer(s);
+    }
+    
+    public boolean twoPointer(String s) {
         String str = s.toLowerCase();
         
         int l = 0;
