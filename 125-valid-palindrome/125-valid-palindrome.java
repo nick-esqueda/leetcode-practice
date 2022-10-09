@@ -1,5 +1,6 @@
 class Solution {
     public boolean isPalindrome(String s) {
+        // return reverse(s);
         return twoPointer(s);
     }
     
@@ -24,5 +25,20 @@ class Solution {
         }
         
         return true;
+    }
+    
+    public boolean reverse(String s) {
+        StringBuilder sb = new StringBuilder();
+        
+        for (char c : s.toCharArray()) {
+            if (Character.isLetterOrDigit(c)) {
+                sb.append(Character.toLowerCase(c));
+            }
+        }
+        
+        String forward = sb.toString();
+        String backward = sb.reverse().toString();
+        
+        return forward.equals(backward);
     }
 }
