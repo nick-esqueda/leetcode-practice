@@ -1,19 +1,12 @@
 class Solution {
     public int maxArea(int[] height) {
         // return bruteForce(height);
-        return optimized(height);
+        return twoPointer(height);
     }
     
-    public int optimized(int[] height) {
+    public int twoPointer(int[] height) {
         /*
-            
             keep the larger pointer, move the smaller.
-            
-            [1, 8, 6, 2, 5, 4, 8, 3, 7]
-                L                    R
-                
-            [101, 1012, 7, 99, 100]
-             L                  R
         */
         
         int L = 0, R = height.length - 1;
