@@ -13,23 +13,25 @@ class Solution {
         if (s1.length() > s2.length()) return false;
         
         int[] s1Counts = new int[26];
-        for (char c : s1.toCharArray()) s1Counts[c - 'a']++;
         
-        int i = 0;
-        int j = s1.length() - 1;
-        while (j < s2.length()) {
-            int[] substrCounts = makeMap(s2, i, j);
+        int L = 0;
+        for (int R = 0; R < s2.length(); ++R) {
+            if (R < s1.length()) {
+                char c = s1.charAt(R);
+                s1Counts[c - 'a']++;
+            }
+            if (R < s1.length() - 1) continue;
             
+            int[] substrCounts = getCounts(s2, L, R);
             if (isEqual(s1Counts, substrCounts)) return true;
             
-            i += 1;
-            j += 1;
+            L += 1;
         }
         
         return false;
     }
     
-    public int[] makeMap(String s, int start, int end) {
+    public int[] getCounts(String s, int start, int end) {
         int[] s2Counts = new int[26];
         
         for (int i = start; i <= end; ++i) {
