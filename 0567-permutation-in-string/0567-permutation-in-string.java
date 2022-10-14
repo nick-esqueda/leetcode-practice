@@ -8,19 +8,19 @@ class Solution {
             compare the maps on each iteration
             if both maps have the same contents, then you can just return out true
             if the R pointer leaves the end of s2, return false
-            
         */
         
         if (s1.length() > s2.length()) return false;
         
-        Map<Character, Integer> s1map = makeMap(s1, 0, s1.length() - 1);
+        int[] s1Counts = new int[26];
+        for (char c : s1.toCharArray()) s1Counts[c - 'a']++;
         
         int i = 0;
         int j = s1.length() - 1;
         while (j < s2.length()) {
-            Map<Character, Integer> substrMap = makeMap(s2, i, j);
+            int[] substrCounts = makeMap(s2, i, j);
             
-            if (substrMap.equals(s1map)) return true;
+            if (isEqual(s1Counts, substrCounts)) return true;
             
             i += 1;
             j += 1;
@@ -29,18 +29,23 @@ class Solution {
         return false;
     }
     
-    public Map<Character, Integer> makeMap(String s, int start, int end) {
-        Map<Character, Integer> res = new HashMap<>();
+    public int[] makeMap(String s, int start, int end) {
+        int[] s2Counts = new int[26];
         
         for (int i = start; i <= end; ++i) {
             char c = s.charAt(i);
-            if (!res.containsKey(c)) res.put(c, 0);
-            res.put(c, res.get(c) + 1);
+            s2Counts[c - 'a']++;
         }
         
-        return res;
+        return s2Counts;
     }
     
+    public boolean isEqual(int[] a, int[] b) {
+        for (int i = 0; i < a.length; ++i) {
+            if (a[i] != b[i]) return false;
+        }
+        return true;
+    }
 
     
 }
