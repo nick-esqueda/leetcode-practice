@@ -14,12 +14,11 @@ class Solution {
         
         int[] s1Counts = new int[26];
         int[] substrCounts = new int[26];
-        
         for (char c : s1.toCharArray()) s1Counts[c - 'a']++;
         
         int L = 0;
         for (int R = 0; R < s2.length(); ++R) {
-            while (R < s1.length() - 1) { // pre-fill s2 window chars to match s2 length.
+            while (R < s1.length() - 1) { // pre-fill s2 window chars to match s1 length.
                 substrCounts[s2.charAt(R) - 'a']++;
                 R++;
             }
