@@ -13,33 +13,25 @@ class Solution {
         if (s1.length() > s2.length()) return false;
         
         int[] s1Counts = new int[26];
+        int[] substrCounts = new int[26];
+        
+        for (char c : s1.toCharArray()) s1Counts[c - 'a']++;
         
         int L = 0;
         for (int R = 0; R < s2.length(); ++R) {
-            if (R < s1.length()) {
-                char c = s1.charAt(R);
-                s1Counts[c - 'a']++;
+            while (R < s1.length() - 1) { // pre-fill s2 window chars to match s2 length.
+                substrCounts[s2.charAt(R) - 'a']++;
+                R++;
             }
-            if (R < s1.length() - 1) continue;
             
-            int[] substrCounts = getCounts(s2, L, R);
-            if (isEqual(s1Counts, substrCounts)) return true;
-            
+            substrCounts[s2.charAt(R) - 'a']++;
+            if (isEqual(s1Counts, substrCounts)) return true; 
+
+            substrCounts[s2.charAt(L) - 'a']--;
             L += 1;
         }
         
         return false;
-    }
-    
-    public int[] getCounts(String s, int start, int end) {
-        int[] s2Counts = new int[26];
-        
-        for (int i = start; i <= end; ++i) {
-            char c = s.charAt(i);
-            s2Counts[c - 'a']++;
-        }
-        
-        return s2Counts;
     }
     
     public boolean isEqual(int[] a, int[] b) {
