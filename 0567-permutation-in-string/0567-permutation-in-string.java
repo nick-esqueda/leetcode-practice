@@ -18,16 +18,13 @@ class Solution {
         
         int L = 0;
         for (int R = 0; R < s2.length(); ++R) {
-            while (R < s1.length() - 1) { // pre-fill s2 window chars to match s1 length.
-                substrCounts[s2.charAt(R) - 'a']++;
-                R++;
-            }
-            
             substrCounts[s2.charAt(R) - 'a']++;
             if (isEqual(s1Counts, substrCounts)) return true; 
 
-            substrCounts[s2.charAt(L) - 'a']--;
-            L += 1;
+            if (R >= s1.length() - 1) { // only move L if R has caught up to s1.length.
+                substrCounts[s2.charAt(L) - 'a']--;
+                L += 1;
+            }
         }
         
         return false;
