@@ -1,7 +1,27 @@
 class Solution {
     public int[] productExceptSelf(int[] nums) {
         // return bruteForce(nums);
-        return prefixArray(nums);
+        // return prefixArray(nums);
+        return prefixSpaceOpt(nums);
+    }
+    
+    public int[] prefixSpaceOpt(int[] nums) {
+        int[] res = new int[nums.length];
+        res[0] = 1;
+        
+        // init with prefix products.
+        for (int i = 1; i < nums.length; ++i) {
+            res[i] = res[i - 1] * nums[i - 1];
+        }
+        
+        // get suffixes and final products simultaneously.
+        int suffix = 1;
+        for (int i = nums.length - 2; i >= 0; --i) {
+            suffix *= nums[i + 1]; // get curr suffix.
+            res[i] *= suffix; // prefix * suffix
+        }
+        
+        return res;
     }
     
     public int[] prefixArray(int[] nums) {
@@ -12,7 +32,7 @@ class Solution {
             multiply the prefix at suffix at each idx to get the answer.
             
                 [1, 2, 3, 4]
-            p = [1, 1]
+            p = [1, 1, 2, 6]
             s = [24,12,4, 1]
         */
         
