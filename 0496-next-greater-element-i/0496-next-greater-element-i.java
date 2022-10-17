@@ -8,14 +8,12 @@ class Solution {
         
         for (int i = 0; i < nums1.length; ++i) {
             int target = nums1[i];
-            int match = -1;
+            boolean found = false;
             int nge = -1;
             for (int j = 0; j < nums2.length; ++j) {
-                if (nums2[j] == target) match = j; // catch the start of the subprocess to find the NGE.
+                if (nums2[j] == target) found = true;
                 
-                if (match == -1) continue;
-                
-                if (nums2[j] > target) {
+                if (found && nums2[j] > target) {
                     nge = nums2[j];
                     break;
                 }
