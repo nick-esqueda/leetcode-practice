@@ -27,18 +27,16 @@ class Solution {
                 if (charNum == '.') continue;
                 
                 int num = Character.getNumericValue(charNum);
-                
-                // CHECK ROWS
-                if (rows[r][num] == 1) return false;
-                rows[r][num] = 1;
-                
-                // CHECK COLS
-                if (cols[c][num] == 1) return false;
-                cols[c][num] = 1;
-                
-                // CHECK BOXES
                 int box = ((r / 3) * 3) + (c / 3);
-                if (boxes[box][num] == 1) return false;
+                
+                if (rows[r][num] == 1 ||
+                    cols[c][num] == 1 ||
+                    boxes[box][num] == 1) {
+                    return false;
+                }
+                
+                rows[r][num] = 1;
+                cols[c][num] = 1;
                 boxes[box][num] = 1;
             }
         }
