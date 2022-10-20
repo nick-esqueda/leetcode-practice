@@ -13,7 +13,52 @@ class Solution {
         */
         
         // return arrayFlags(board);
-        return arrayFlagsOnePass(board);
+        // return arrayFlagsOnePass(board);
+        return bitmask(board);
+    }
+    
+    public boolean bitmask(char[][] board) {
+        /*
+            need to use a number with at 9 bits that correspond to each digit.
+                - LSB will not be used.
+            if num == whatever number on the board at curr pos is, then...
+            to check if that number has been seen:
+                mask & (1 << num) // <- if 1, then the number is seen. if 0, not seen.
+            to switch a flag on:
+                mask = mask | (1 << num) // flips the flag corresponding to the number.
+                
+            you will need a mask for every row, every col, and every box.
+        */
+        
+        int[] rows = new int[9];
+        int[] cols = new int[9];
+        int[] boxes = new int[9];
+        
+        for (int row = 0; row < 9; ++row) {
+            for (int col = 0; col < 9; ++col) {
+                char c = board[row][col];
+                if (c == '.') continue;
+                
+                int num = Character.getNumericValue(c);
+                int boxIdx = ((row / 3) * 3) + (col / 3);
+                
+                int rowMask = rows[row];
+                int colMask = cols[col];
+                int boxMask = boxes[boxIdx];
+                
+                if ((rowMask & (1 << num)) != 0 ||
+                    (colMask & (1 << num)) != 0 ||
+                    (boxMask & (1 << num)) != 0) {
+                    return false;
+                }
+                
+                rows[row] = rowMask | (1 << num);
+                cols[col] = colMask | (1 << num);
+                boxes[boxIdx] = boxMask | (1 << num);
+            }
+        }
+        
+        return true;
     }
     
     public boolean arrayFlagsOnePass(char[][] board) {
