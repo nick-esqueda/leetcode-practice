@@ -23,7 +23,7 @@ class Solution {
                 - LSB will not be used.
             if num == whatever number on the board at curr pos is, then...
             to check if that number has been seen:
-                mask & (1 << num) // <- if 1, then the number is seen. if 0, not seen.
+                mask & (1 << num) // if 0, then the number hasn't been seen yet.
             to switch a flag on:
                 mask = mask | (1 << num) // flips the flag corresponding to the number.
                 
