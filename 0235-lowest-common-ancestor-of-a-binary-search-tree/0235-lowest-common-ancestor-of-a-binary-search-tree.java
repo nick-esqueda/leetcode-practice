@@ -12,12 +12,12 @@ class Solution {
     private TreeNode LCA;
     
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        return findLCABST(root, p, q);
+        
         // LCA = new TreeNode();
         // findLCABT(root, p, q);
         // findLCABST(root, p, q);
         // return LCA;
-        
-        return findLCABST(root, p, q);
     }
     
     public boolean findLCABT(TreeNode root, TreeNode p, TreeNode q) {
@@ -37,8 +37,6 @@ class Solution {
     }
     
     public TreeNode findLCABST(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null) return new TreeNode();
-        
         if ((p.val <= root.val && q.val >= root.val) || 
             (q.val <= root.val && p.val >= root.val)) {
             return root;
