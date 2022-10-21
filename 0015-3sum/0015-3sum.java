@@ -1,7 +1,34 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         // return bruteForce(nums);
-        return twoPointer(nums);
+        // return twoPointer(nums);
+        return set(nums);
+    }
+    
+    public List<List<Integer>> set(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        
+        for (int i = 0; i < nums.length - 2; ++i) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+            Set<Integer> compliments = new HashSet<>();
+            
+            for (int j = i + 1; j < nums.length; ++j) {
+                int compli = -(nums[i] + nums[j]);
+                if (compliments.contains(compli)) {
+                    res.add(Arrays.asList(nums[i], nums[j], compli));
+                    
+                    // REMINDER: ++j will occur again after for loop iteration.
+                    while (j + 1 < nums.length && nums[j] == nums[j + 1]) {
+                        j += 1;
+                    }
+                }
+                
+                compliments.add(nums[j]);
+            }
+        }
+        
+        return res;
     }
     
     public List<List<Integer>> twoPointer(int[] nums) {       
