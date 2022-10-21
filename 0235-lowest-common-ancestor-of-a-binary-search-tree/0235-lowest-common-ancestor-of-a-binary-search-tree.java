@@ -12,18 +12,20 @@ class Solution {
     private TreeNode LCA;
     
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        // ! THIS IS THE SOLUTION FOR ALL BINARY TREES, NOT JUST BST.
-        LCA = new TreeNode();
-        findLCA(root, p, q);
-        return LCA;
+        // LCA = new TreeNode();
+        // findLCABT(root, p, q);
+        // findLCABST(root, p, q);
+        // return LCA;
+        
+        return findLCABST(root, p, q);
     }
     
-    public boolean findLCA(TreeNode root, TreeNode p, TreeNode q) {
+    public boolean findLCABT(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null) return false;
         
         boolean isRoot = root.val == p.val || root.val == q.val;
-        boolean inLeft = findLCA(root.left, p, q);
-        boolean inRight = findLCA(root.right, p, q);
+        boolean inLeft = findLCABT(root.left, p, q);
+        boolean inRight = findLCABT(root.right, p, q);
         
         if ((inLeft && inRight) || (isRoot && inLeft) || (isRoot && inRight)) {
             LCA = root;
@@ -32,5 +34,18 @@ class Solution {
         }
         
         return false;
+    }
+    
+    public TreeNode findLCABST(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null) return new TreeNode();
+        
+        if ((p.val <= root.val && q.val >= root.val) || 
+            (q.val <= root.val && p.val >= root.val)) {
+            return root;
+        } else if (p.val < root.val && q.val < root.val) {
+            return findLCABST(root.left, p, q);
+        } else {
+            return findLCABST(root.right, p, q);
+        }
     }
 }
