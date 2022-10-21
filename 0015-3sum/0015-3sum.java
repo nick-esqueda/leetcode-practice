@@ -1,8 +1,8 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         // return bruteForce(nums);
-        return twoPointer(nums);
-        // return set(nums);
+        // return twoPointer(nums);
+        return set(nums);
     }
     
     public List<List<Integer>> set(int[] nums) {
