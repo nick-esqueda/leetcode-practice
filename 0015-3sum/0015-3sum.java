@@ -3,7 +3,37 @@ class Solution {
         // return bruteForce(nums);
         // return twoPointer(nums);
         // return set(nums);
-        return noSort(nums);
+        // return noSort(nums);
+        return mapVsSet(nums);
+    }
+    
+    public List<List<Integer>> mapVsSet(int[] nums) {
+        /*
+            instead of creating a new set on every outer loop,
+            we can use a map to mark that a compliment appeared 
+            on this specific iteration.
+        */
+        
+        Set<List<Integer>> res = new HashSet<>();
+        Map<Integer, Integer> comps = new HashMap<>(); // { comp: i }
+        Set<Integer> iSeen = new HashSet<>();
+        
+        for (int i = 0; i < nums.length - 2; ++i) {
+            if (!iSeen.add(nums[i])) continue; // small optimization.
+            
+            for (int j = i + 1; j < nums.length; ++j) {
+                int comp = -(nums[i] + nums[j]);
+                if (comps.containsKey(comp) && comps.get(comp) == i) {
+                    List<Integer> trip = Arrays.asList(nums[i], nums[j], comp);
+                    Collections.sort(trip);
+                    res.add(trip);
+                }
+                
+                comps.put(nums[j], i); // "comp appeared on this iter."
+            }
+        }
+        
+        return new ArrayList(res);
     }
     
     public List<List<Integer>> noSort(int[] nums) {
