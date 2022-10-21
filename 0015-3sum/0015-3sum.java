@@ -8,32 +8,26 @@ class Solution {
     
     public List<List<Integer>> noSort(int[] nums) {
         /*
-            in order to do this without sorting, you're going to need to remember the numbers that you come across, so that you don't pick dups again.
-            need a set so that i doesn't ever land on a dup.
-            need a "used" set for twoSum:
-                make sure before you add to res, that either i or j isn't in there. if one of those are present, then you're about to add a dup.
-                put i/j in after adding to res.
-            
-            [-1,0,1,2,-1,-4]
+            can get around sorting by using a set for res.
+            anytime you add another duplicate triplet, it will get 
+            filtered out by the set.
+            convert to ArrayList at the end.
         */
         
         Set<List<Integer>> res = new HashSet<>();
+        Set<Integer> iSeen = new HashSet<>();
         
         for (int i = 0; i < nums.length - 2; ++i) {
+            if (iSeen.contains(nums[i])) continue; // small optimization.
+            iSeen.add(nums[i]);
             Set<Integer> compliments = new HashSet<>();
-            // Set<Integer> jUsed = new HashSet<>();
             
             for (int j = i + 1; j < nums.length; ++j) {
                 int comp = -(nums[i] + nums[j]);
                 if (compliments.contains(comp)) {
-                    // if (!jUsed.contains(nums[j]) && !jUsed.contains(comp)) {
-                        List<Integer> trip = Arrays.asList(nums[i], nums[j], comp);
-                        Collections.sort(trip);
-                        res.add(trip);
-                        
-                        // jUsed.add(nums[j]);
-                        // jUsed.add(comp);
-                    // }
+                    List<Integer> trip = Arrays.asList(nums[i], nums[j], comp);
+                    Collections.sort(trip);
+                    res.add(trip);
                 }
                     
                 compliments.add(nums[j]);
