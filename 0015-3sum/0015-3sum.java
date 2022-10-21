@@ -2,7 +2,45 @@ class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         // return bruteForce(nums);
         // return twoPointer(nums);
-        return set(nums);
+        // return set(nums);
+        return noSort(nums);
+    }
+    
+    public List<List<Integer>> noSort(int[] nums) {
+        /*
+            in order to do this without sorting, you're going to need to remember the numbers that you come across, so that you don't pick dups again.
+            need a set so that i doesn't ever land on a dup.
+            need a "used" set for twoSum:
+                make sure before you add to res, that either i or j isn't in there. if one of those are present, then you're about to add a dup.
+                put i/j in after adding to res.
+            
+            [-1,0,1,2,-1,-4]
+        */
+        
+        Set<List<Integer>> res = new HashSet<>();
+        
+        for (int i = 0; i < nums.length - 2; ++i) {
+            Set<Integer> compliments = new HashSet<>();
+            Set<Integer> jUsed = new HashSet<>();
+            
+            for (int j = i + 1; j < nums.length; ++j) {
+                int comp = -(nums[i] + nums[j]);
+                if (compliments.contains(comp)) {
+                    if (!jUsed.contains(nums[j]) && !jUsed.contains(comp)) {
+                        List<Integer> trip = Arrays.asList(nums[i], nums[j], comp);
+                        Collections.sort(trip);
+                        res.add(trip);
+                        
+                        jUsed.add(nums[j]);
+                        jUsed.add(comp);
+                    }
+                }
+                    
+                compliments.add(nums[j]);
+            }
+        }
+        
+        return new ArrayList(res);
     }
     
     public List<List<Integer>> set(int[] nums) {
@@ -14,7 +52,7 @@ class Solution {
             Set<Integer> compliments = new HashSet<>();
             
             for (int j = i + 1; j < nums.length; ++j) {
-                int compli = -(nums[i] + nums[j]);
+                int compli = -(nums[i] + nums[j]); 
                 if (compliments.contains(compli)) {
                     res.add(Arrays.asList(nums[i], nums[j], compli));
                     
