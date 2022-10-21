@@ -15,7 +15,7 @@ class Solution {
         */
         
         Set<List<Integer>> res = new HashSet<>();
-        Set<Integer> iSeen = new HashSet<>();
+        Set<Integer> iSeen = new HashSet<>(); // small optimization.
         
         for (int i = 0; i < nums.length - 2; ++i) {
             if (iSeen.contains(nums[i])) continue; // small optimization.
