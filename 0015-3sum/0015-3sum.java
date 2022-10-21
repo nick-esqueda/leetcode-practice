@@ -21,19 +21,19 @@ class Solution {
         
         for (int i = 0; i < nums.length - 2; ++i) {
             Set<Integer> compliments = new HashSet<>();
-            Set<Integer> jUsed = new HashSet<>();
+            // Set<Integer> jUsed = new HashSet<>();
             
             for (int j = i + 1; j < nums.length; ++j) {
                 int comp = -(nums[i] + nums[j]);
                 if (compliments.contains(comp)) {
-                    if (!jUsed.contains(nums[j]) && !jUsed.contains(comp)) {
+                    // if (!jUsed.contains(nums[j]) && !jUsed.contains(comp)) {
                         List<Integer> trip = Arrays.asList(nums[i], nums[j], comp);
                         Collections.sort(trip);
                         res.add(trip);
                         
-                        jUsed.add(nums[j]);
-                        jUsed.add(comp);
-                    }
+                        // jUsed.add(nums[j]);
+                        // jUsed.add(comp);
+                    // }
                 }
                     
                 compliments.add(nums[j]);
