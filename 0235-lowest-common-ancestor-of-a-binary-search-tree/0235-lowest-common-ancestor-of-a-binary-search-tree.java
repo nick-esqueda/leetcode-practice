@@ -10,7 +10,9 @@
 
 class Solution {
     private TreeNode LCA;
+    
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        // ! THIS IS THE SOLUTION FOR ALL BINARY TREES, NOT JUST BST.
         LCA = new TreeNode();
         findLCA(root, p, q);
         return LCA;
