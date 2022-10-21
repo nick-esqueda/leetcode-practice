@@ -1,8 +1,8 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         // return bruteForce(nums);
-        // return twoPointer(nums);
-        return set(nums);
+        return twoPointer(nums);
+        // return set(nums);
     }
     
     public List<List<Integer>> set(int[] nums) {
@@ -50,11 +50,9 @@ class Solution {
                 } else if (sum > 0) {
                     R -= 1;
                 } else {
-                    List<Integer> trip = Arrays.asList(nums[i], nums[L], nums[R]);
+                    List<Integer> trip = Arrays.asList(nums[i], nums[L++], nums[R--]);
                     res.add(trip);
-
-                    L += 1;
-                    R -= 1;
+                    
                     // make sure L doesn't land on a duplicate. 
                     while (L < R && nums[L] == nums[L - 1]) {
                         L += 1;
