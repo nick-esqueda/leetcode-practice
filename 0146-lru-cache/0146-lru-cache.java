@@ -69,6 +69,12 @@ class LRUCache {
     }
     
     public void enqueue(Node node) {
+        /*
+        puts the given node at the end of the queue.
+        will increment length.
+        (a.k.a. addToTail)
+        */
+        
         if (this.count == 0) {
             this.head = node;
             this.tail = node;
@@ -82,6 +88,11 @@ class LRUCache {
     }
     
     public Node dequeue() {
+        /*
+        removes the head of the queue and returns it.
+        will decrement length.
+        (a.k.a. removeFromHead)
+        */
         if (this.count == 0) return null;
         
         Node oldHead = this.head;
@@ -97,6 +108,11 @@ class LRUCache {
     }
 
     public Node removeFromTail() {
+        /*
+        removes the end of the queue and returns it.
+        will decrement length.
+        (a.k.a. removeFromTail)
+        */
         if (this.count == 0) return null;
         
         Node oldTail = this.tail;
@@ -112,6 +128,10 @@ class LRUCache {
     }
     
     public void removeNode(Node node) {
+        /*
+        will remove the given Node from wherever it is in the queue.
+        will decrement length.
+        */
         if (this.count == 0) return;
         
         if (node == this.head) {
