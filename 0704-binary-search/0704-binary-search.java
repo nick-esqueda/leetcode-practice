@@ -1,5 +1,9 @@
 class Solution {
     public int search(int[] nums, int target) {
+        return v1(nums, target);
+    }
+    
+    public int v1(int[] nums, int target) {
         int lo = 0;
         int hi = nums.length - 1;
         
@@ -17,4 +21,4 @@ class Solution {
         
         return -1;
     }
-}
+}  
