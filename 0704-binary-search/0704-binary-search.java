@@ -12,13 +12,12 @@ class Solution {
             // math trick to avoid integer overflow.
             int mid = lo + ((hi - lo) / 2);
             
-            if (nums[mid] == target) {
+            if (nums[mid] == target)
                 return mid;
-            } else if (target < nums[mid]) {
+            else if (target < nums[mid])
                 hi = mid - 1;
-            } else {
+            else 
                 lo = mid + 1;
-            }
         }
         
         return -1;
