@@ -39,14 +39,14 @@ class Solution {
             //     hi = k - 1;
             // }
             
-            if (h < totalHours) { // finished a little fast.
+            if (h < totalHours) { // took too long.
                 lo = k + 1;
-            } else { // finished right on time, or took too long.
+            } else { // finished right on time, or a little fast.
                 hi = k;
             }
         }
         
-        return lo;
+        return hi;
     }
     
     public int bruteForce(int[] piles, int h) {
