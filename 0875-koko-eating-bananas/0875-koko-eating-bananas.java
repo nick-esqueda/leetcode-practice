@@ -64,8 +64,7 @@ class Solution {
     public int hoursToEat(int[] piles, double k) {
         int totalHours = 0;
         for (double count : piles) {
-            int hours = (int) Math.ceil(count / k);
-            totalHours += hours;
+            totalHours += (int) Math.ceil(count / k);
         }
         
         return totalHours;
