@@ -14,6 +14,9 @@
  * }
  */
 class Solution {
+    int prev;
+    boolean found = false;
+    
     public TreeNode deleteNode(TreeNode root, int key) {
         /*
             NO CHILDREN:
@@ -53,9 +56,6 @@ class Solution {
         
         return root;
     }
-    
-    int prev;
-    boolean found = false;
     
     public int getPredecessor(TreeNode root, int target) {
         // a predecessor is guaranteed to exist on a root with 2 children.
