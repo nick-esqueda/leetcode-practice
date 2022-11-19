@@ -1,21 +1,5 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        # return self.map_counts(s, t)
-        return self.arr_count(s, t)
-
-    def arr_count(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
-            return False
-
-        diff = [0] * 26
-        for i in range(len(s)):
-            diff[ord(s[i]) - ord('a')] += 1
-            diff[ord(t[i]) - ord('a')] -= 1
-            
-        return not any(diff)
-        
-    
-    def map_counts(self, s: str, t: str) -> bool:
         if len(s) != len(t):
             return False
 
