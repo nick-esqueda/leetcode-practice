@@ -26,27 +26,18 @@ class Solution {
 
         int lo = 1; 
         int hi = max;
-        
         while (lo < hi) {
-            int k = lo + ((hi - lo) / 2);
-            int totalHours = hoursToEat(piles, k);
-            
-            // if (totalHours == h) { // finished right on time.
-            //     return k;
-            // } else if (h < totalHours) { // took too long.
-            //     lo = k + 1;
-            // } else { // finished too fast.
-            //     hi = k - 1;
-            // }
-            
-            if (h < totalHours) { // took too long.
-                lo = k + 1;
-            } else { // finished right on time, or a little fast.
-                hi = k;
+            int speed = lo + ((hi - lo) / 2); // left mid.
+            int totalHours = hoursToEat(piles, speed);
+
+            if (h >= totalHours) {
+                hi = speed;
+            } else {
+                lo = speed + 1;
             }
         }
         
-        return hi;
+        return lo;
     }
     
     public int bruteForce(int[] piles, int h) {
