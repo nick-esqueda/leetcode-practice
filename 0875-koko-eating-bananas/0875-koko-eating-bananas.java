@@ -30,7 +30,7 @@ class Solution {
             int speed = lo + ((hi - lo) / 2); // left mid.
             int totalHours = hoursToEat(piles, speed);
 
-            if (h >= totalHours) {
+            if (totalHours <= h) {
                 hi = speed;
             } else {
                 lo = speed + 1;
