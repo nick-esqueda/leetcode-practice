@@ -2,17 +2,18 @@ class Solution:
     def findMin(self, nums: List[int]) -> int:
         lo = 0
         hi = len(nums) - 1
-        while lo <= hi:
+        while lo < hi:
             mid = lo + ((hi - lo) // 2) # left mid.
             
-            if nums[lo] > nums[mid]: # left has real start.
+            if nums[mid] < nums[hi]:
+                # (mid < hi) && (lo == mid || lo < mid || lo > mid)
                 hi = mid
-            elif nums[hi] < nums[mid]: # right has real start.
+            else:
+                # (mid > hi || mid == hi) && (lo == mid || lo < mid || lo > mid)
+                #              !possible                               !possible
                 lo = mid + 1
-            else: # lo -> hi is sorted, or lo == mid (bc we chose left mid), or only 1 ele left
-                if nums[lo] < nums[hi]:
-                    return nums[lo]
-                return nums[hi]
+        
+        return nums[lo]
         
         """
         can't search normally, have to bin search for minimum.
