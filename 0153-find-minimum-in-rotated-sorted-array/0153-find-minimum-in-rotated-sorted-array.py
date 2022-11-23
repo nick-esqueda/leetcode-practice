@@ -2,25 +2,23 @@ class Solution:
     def findMin(self, nums: List[int]) -> int:
         lo = 0
         hi = len(nums) - 1
-        while lo < hi:
+        while lo <= hi:
             mid = lo + ((hi - lo) // 2) # left mid.
             
             if nums[lo] > nums[mid]: # left has real start.
                 hi = mid
             elif nums[hi] < nums[mid]: # right has real start.
                 lo = mid + 1
-            else: # lo -> hi is sorted, or lo == mid (bc we chose left mid)
+            else: # lo -> hi is sorted, or lo == mid (bc we chose left mid), or only 1 ele left
                 if nums[lo] < nums[hi]:
                     return nums[lo]
                 return nums[hi]
-        
-        return nums[lo]
         
         """
         can't search normally, have to bin search for minimum.
         how to know though that there's a smaller number?
         i guess you can just use the ptrs to gauge, since those will span the whole search space
-        actually, you kind of just want to find the breakpoint.
+        actually, you kind of just want to fi nd the breakpoint.
         that's what we're doing actually straight up, is finding the breakpoint.
         
         THOUGHTS:
