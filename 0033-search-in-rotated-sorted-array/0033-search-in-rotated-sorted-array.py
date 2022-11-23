@@ -1,23 +1,25 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        
         lo = 0
         hi = len(nums) - 1
         while lo <= hi:
             mid = lo + ((hi - lo) // 2)
             
-            if target < nums[mid]: # want to go left, but, need to check if you should go right instead.
+            if nums[mid] == target:
+                return mid
+            
+            elif target < nums[mid]: # want to go left, but...
+                # check if you should go right instead.
                 if nums[hi] < nums[mid] and target <= nums[hi]:
                     lo = mid + 1
                 else:
                     hi = mid - 1
-            elif target > nums[mid]: # want to go right, but, need to check if you should go left instead.
+            elif target > nums[mid]: # want to go right, but...
+                # check if you should go left instead.
                 if nums[lo] > nums[mid] and target >= nums[lo]:
                     hi = mid - 1
                 else:
                     lo = mid + 1
-            else:
-                return mid
         
         return -1
         
@@ -42,7 +44,7 @@ class Solution:
             if the breakpoint is in the right:
                 - if target is <= R, then you should go right, not left, because the smaller vals will be there.
                 - if target is > R, then go left like normal.
-                
+        SIMPLIFIED:
         if the target is greater than mid:
             if the breakpoint is to the left and target is >= L:
                 go left, not right.
@@ -76,8 +78,5 @@ class Solution:
                   m        
          l       
                            r
-        
-        
-        [1, 2, 3, 4, 5, 0, 2]
         
         """
