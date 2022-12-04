@@ -33,7 +33,7 @@ class Solution:
         the arr is unique elements.
         you can check if lo/hi is strictly </> mid?
         
-        you're "looking for the fucked up shit"
+        you're "looking for the messed up side"
         
         [3, 4, 5, 1, 2]
                m
