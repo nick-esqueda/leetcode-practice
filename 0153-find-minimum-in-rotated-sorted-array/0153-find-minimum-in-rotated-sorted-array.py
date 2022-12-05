@@ -1,18 +1,32 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
+#         lo = 0
+#         hi = len(nums) - 1
+#         while lo < hi:
+#             mid = lo + ((hi - lo) // 2) # left mid.
+            
+#             if nums[mid] < nums[hi]:
+#                 # (mid < hi) && (lo == mid || lo < mid || lo > mid)
+#                 hi = mid
+#             else:
+#                 # (mid > hi || mid == hi) && (lo == mid || lo < mid || lo > mid)
+#                 #              !possible                               !possible
+#                 lo = mid + 1
+        
+#         return nums[lo]
+
         lo = 0
         hi = len(nums) - 1
-        while lo < hi:
-            mid = lo + ((hi - lo) // 2) # left mid.
-            
-            if nums[mid] < nums[hi]:
-                # (mid < hi) && (lo == mid || lo < mid || lo > mid)
-                hi = mid
-            else:
-                # (mid > hi || mid == hi) && (lo == mid || lo < mid || lo > mid)
-                #              !possible                               !possible
-                lo = mid + 1
         
+        while lo < hi:
+            mid = lo + ((hi - lo) // 2)
+            
+            # look for the break and go that way
+            if nums[mid] > nums[hi]:
+                lo = mid + 1
+            else:
+                hi = mid
+                
         return nums[lo]
         
         """
