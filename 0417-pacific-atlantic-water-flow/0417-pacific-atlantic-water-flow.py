@@ -3,14 +3,13 @@ class Solution:
         num_rows, num_cols = len(heights), len(heights[0])
         
         def dfs(r, c, vis, matrix, prev_height=float('-inf')):
-            pos = (r, c)
             if (r < 0 or r == num_rows or
-                c < 0 or c == num_cols or
-                pos in vis):
+                c < 0 or c == num_cols):
                 return
-            
+            pos = (r, c)
             height = matrix[r][c]
-            if height < prev_height:
+            if (pos in vis or
+                height < prev_height):
                 return
             
             vis.add(pos)
