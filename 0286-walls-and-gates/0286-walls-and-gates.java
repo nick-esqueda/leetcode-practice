@@ -9,7 +9,7 @@ class Solution {
             }
         }
         
-        int dist = -1;
+        int dist = 0;
         while (!q.isEmpty()) {
             dist += 1;
             int len = q.size();
@@ -17,13 +17,13 @@ class Solution {
                 int[] pos = q.poll();
                 int r = pos[0], c = pos[1];
                 
-                if (rooms[r][c] == Integer.MAX_VALUE) {
-                    rooms[r][c] = dist;
-                }
-                
                 List<int[]> neighbors = getNeighbors(r, c, rooms);
                 for (int[] nei : neighbors) {
-                    q.offer(nei);
+                    int nR = nei[0], nC = nei[1];
+                    if (rooms[nR][nC] == Integer.MAX_VALUE) {
+                        rooms[nR][nC] = dist;
+                        q.offer(nei);
+                    }
                 }
             }
         }
