@@ -7,13 +7,11 @@ class Solution {
         for (int end = 0; end < s.length(); ++end) {
             char c = s.charAt(end);
 
-            if (windowChars.contains(c)) {
-                // move start up to 1 after the first appearance of that letter.
-                while (windowChars.contains(c)) {
-                    char lChar = s.charAt(start);
-                    windowChars.remove(lChar);
-                    start += 1;
-                }
+            // move start up to 1 after the first appearance of that letter.
+            while (windowChars.contains(c)) {
+                char lChar = s.charAt(start);
+                windowChars.remove(lChar);
+                start += 1;
             }
 
             windowChars.add(c); 
