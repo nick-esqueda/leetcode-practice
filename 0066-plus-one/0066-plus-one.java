@@ -10,8 +10,8 @@ class Solution {
         what if the carry over goes all the way? will need a new space at the beginning for the 1.
         */
         
-        return whileLoop(digits);
-        // return forLoop(digits);
+        // return whileLoop(digits);
+        return forLoop(digits);
     }
     
     private int[] forLoop(int[] digits) {
