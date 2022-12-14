@@ -1,10 +1,34 @@
 class Solution {
     public int removeDuplicates(int[] nums) {
+        // return twoPointerSwap(nums);
+        return twoPointerNoSwap(nums);
+    }
+    
+    private int twoPointerNoSwap(int[] nums) {
+        int insertionIdx = 1;
+        for (int i = 1; i < nums.length; ++i) {
+            if (nums[i - 1] != nums[i]) {
+                // found a new number, so insert it at the insertion point, and increment pointer.
+                nums[insertionIdx++] = nums[i];
+            }
+        }
+        
+        return insertionIdx;
+        
+        /*
+        don't need to swap anything. 
+        you can just insert the first new number that you come across.
+        once you insert, just increment the insertion pointer.
+        */
+    }
+    
+    private int twoPointerSwap(int[] nums) {
         int k = 0;
         int finalNumOccurrence = 0;
         while (finalNumOccurrence < nums.length) {
             int currNum = nums[finalNumOccurrence];
-            while (finalNumOccurrence < nums.length - 1 && nums[finalNumOccurrence + 1] == currNum) {
+            while (finalNumOccurrence < nums.length - 1 && 
+                   nums[finalNumOccurrence + 1] == currNum) {
                 ++finalNumOccurrence;
             }
             
