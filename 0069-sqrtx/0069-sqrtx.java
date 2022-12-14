@@ -14,9 +14,7 @@ class Solution {
 
             // acceptable vals are <= x
             // unacceptable vals are > x.
-            if (square == x) return (int) num;
-            
-            if (square < x) {
+            if (square <= x) {
                 lo = num;
             } else {
                 hi = num - 1;
