@@ -11,11 +11,32 @@ class Solution {
         */
         
         // return whileLoop(digits);
-        return forLoop(digits);
+        // return forLoop(digits);
+        return refactor(digits);
+    }
+    
+    private int[] refactor(int[] digits) {
+        // set all nines that you comes across to 0.
+        // once you come across a non-nine, add 1 to it and return out.
+        // if you make it out of the loop without finding a non-nine,
+        // add a 1 to the beginning of the array and return that.
+        
+        for (int i = digits.length - 1; i >= 0; --i) {
+            if (digits[i] != 9) {
+                ++digits[i];
+                return digits;
+            }
+            
+            digits[i] = 0;
+        }
+        
+        int[] newDigits = new int[digits.length + 1];
+        newDigits[0] = 1;
+        return newDigits;
     }
     
     private int[] forLoop(int[] digits) {
-        for (int i = digits.length - 1; i >= 0; --i) {            
+        for (int i = digits.length - 1; i >= 0; --i) {
             ++digits[i];
             if (digits[i] == 10) {
                 digits[i] = 0;
