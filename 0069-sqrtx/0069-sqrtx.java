@@ -5,8 +5,6 @@ class Solution {
     }
     
     private int binarySearch(int x) {
-        // acceptable vals are <= x
-        // unacceptable vals are > x.
         long lo = 0; 
         long hi = x;
         
@@ -14,7 +12,11 @@ class Solution {
             long num = lo + ((hi - lo + 1) / 2); // right mid.
             long square = num * num;
 
-            if (square <= x) {
+            // acceptable vals are <= x
+            // unacceptable vals are > x.
+            if (square == x) return (int) num;
+            
+            if (square < x) {
                 lo = num;
             } else {
                 hi = num - 1;
