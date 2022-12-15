@@ -30,12 +30,12 @@ class Solution {
         */
         
         // mergeAndSort(nums1, m, nums2, n);
-        twoPointers(nums1, m, nums2, n);
-        // threePointersV1(nums1, m, nums2, n);
-        // threePointersV2(nums1, m, nums2, n);
+        // threePointerForwards(nums1, m, nums2, n);
+        // threePointerBackwards1(nums1, m, nums2, n);
+        threePointerBackwards2(nums1, m, nums2, n);
     }
     
-    private void threePointersV2(int[] nums1, int m, int[] nums2, int n) {
+    private void threePointerBackwards2(int[] nums1, int m, int[] nums2, int n) {
         int insertionPoint = nums1.length - 1;
         int idx1 = m - 1;
         int idx2 = n - 1;
@@ -53,7 +53,7 @@ class Solution {
         }
     }
     
-    private void threePointersV1(int[] nums1, int m, int[] nums2, int n) {
+    private void threePointerBackwards1(int[] nums1, int m, int[] nums2, int n) {
         int insertionPoint = nums1.length - 1;
         int idx1 = m - 1;
         int idx2 = n - 1;
@@ -71,7 +71,7 @@ class Solution {
         }
     }
     
-    private void twoPointers(int[] nums1, int m, int[] nums2, int n) {
+    private void threePointerForwards(int[] nums1, int m, int[] nums2, int n) {
         int[] copy1 = new int[m];
         for (int i = 0; i < m; ++i) {
             copy1[i] = nums1[i];
@@ -80,7 +80,7 @@ class Solution {
         int insertionPoint = 0;
         int idx1 = 0;
         int idx2 = 0;
-        while (insertionPoint < nums1.length) {
+        while (idx1 < copy1.length || idx2 < nums2.length) {
             if (idx1 == copy1.length) {
                 nums1[insertionPoint++] = nums2[idx2++];
             } else if (idx2 == nums2.length) {
