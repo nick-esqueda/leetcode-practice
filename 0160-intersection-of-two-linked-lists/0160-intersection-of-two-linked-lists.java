@@ -11,7 +11,34 @@
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        return bruteForce(headA, headB);
+        // return bruteForce(headA, headB);
+        return a(headA, headB);
+    }
+    
+    private ListNode a(ListNode headA, ListNode headB) {
+        /*
+        how can we do this in not n^2 time?
+        put nodes inside of a set maybe? but, need to verify that the set will 
+        operate on memory addresses, not just object properties.
+        */
+        
+        Set<ListNode> setB = new HashSet<>();
+        
+        ListNode currB = headB;
+        while (currB != null) {
+            setB.add(currB);
+            currB = currB.next;
+        }
+        
+        ListNode currA = headA;
+        while (currA != null) {
+            if (setB.contains(currA)) {
+                return currA;
+            }
+            currA = currA.next;
+        }
+        
+        return null;
     }
     
     private ListNode bruteForce(ListNode headA, ListNode headB) {
@@ -20,7 +47,6 @@ public class Solution {
         */
         
         ListNode currA = headA;
-        
         while (currA != null) {
             ListNode currB = headB;
             while (currB != null) {
