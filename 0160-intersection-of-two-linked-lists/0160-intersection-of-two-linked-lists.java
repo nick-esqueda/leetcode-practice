@@ -42,15 +42,11 @@ public class Solution {
         }
         
         curr2 = aIsLonger ? headB : headA;
-        while (curr1 != null && curr2 != null) {
-            if (curr1 == curr2) {
-                return curr1;
-            }
+        while (curr1 != curr2) {
             curr1 = curr1.next;
             curr2 = curr2.next;
         }
-        
-        return null;
+        return curr1;
     }
     
     private ListNode set(ListNode headA, ListNode headB) {
