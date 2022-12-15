@@ -29,8 +29,9 @@ class Solution {
                   b
         */
         
+        mergeAndSort(nums1, m, nums2, n);
         // threePointersV1(nums1, m, nums2, n);
-        threePointersV2(nums1, m, nums2, n);
+        // threePointersV2(nums1, m, nums2, n);
     }
     
     private void threePointersV2(int[] nums1, int m, int[] nums2, int n) {
@@ -43,7 +44,6 @@ class Solution {
                 return;
             }
             
-            // idx2 is always in-bounds here, so idx1 could be anything.
             if (idx1 >= 0 && nums1[idx1] >= nums2[idx2]) {
                 nums1[insertionPoint--] = nums1[idx1--];
             } else {
@@ -68,5 +68,13 @@ class Solution {
                 nums1[insertionPoint--] = nums2[idx2--];
             }
         }
+    }
+    
+    private void mergeAndSort(int[] nums1, int m, int[] nums2, int n) {
+        for (int i = m; i < nums1.length; ++i) {
+            nums1[i] = nums2[i - m];
+        }
+        
+        Arrays.sort(nums1);
     }
 }
