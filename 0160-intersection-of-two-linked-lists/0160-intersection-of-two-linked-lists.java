@@ -17,9 +17,9 @@ public class Solution {
     }
     
     private ListNode twoPointerUsingLen(ListNode headA, ListNode headB) {
+        // get the length of both lists.
         int lenA = 0;
         int lenB = 0;
-        
         ListNode curr1 = headA;
         ListNode curr2 = headB;
         while (curr1 != null || curr2 != null) {
@@ -33,19 +33,25 @@ public class Solution {
             }
         }
         
+        // find which list is longer.
         boolean aIsLonger = lenA - lenB > 0;
         curr1 = aIsLonger ? headA : headB;
+        
+        // position the longer list's pointer the same distance away 
+        // from the intersection as the other list's head.
         int diff = Math.abs(lenA - lenB);
         while (diff > 0 && curr1 != null) {
             curr1 = curr1.next;
             --diff;
         }
         
+        // traverse with both pointers to find the intersection.
         curr2 = aIsLonger ? headB : headA;
         while (curr1 != curr2) {
             curr1 = curr1.next;
             curr2 = curr2.next;
         }
+        
         return curr1;
     }
     
