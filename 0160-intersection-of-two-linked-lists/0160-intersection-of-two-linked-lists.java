@@ -12,16 +12,48 @@
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         // return bruteForce(headA, headB);
-        return set(headA, headB);
+        // return set(headA, headB);
+        return twoPointerUsingLen(headA, headB);
+    }
+    
+    private ListNode twoPointerUsingLen(ListNode headA, ListNode headB) {
+        int lenA = 0;
+        int lenB = 0;
+        
+        ListNode curr1 = headA;
+        ListNode curr2 = headB;
+        while (curr1 != null || curr2 != null) {
+            if (curr1 != null) {
+                ++lenA;
+                curr1 = curr1.next;
+            }
+            if (curr2 != null) {
+                ++lenB;
+                curr2 = curr2.next;
+            }
+        }
+        
+        boolean aIsLonger = lenA - lenB > 0;
+        curr1 = aIsLonger ? headA : headB;
+        int diff = Math.abs(lenA - lenB);
+        while (diff > 0 && curr1 != null) {
+            curr1 = curr1.next;
+            --diff;
+        }
+        
+        curr2 = aIsLonger ? headB : headA;
+        while (curr1 != null && curr2 != null) {
+            if (curr1 == curr2) {
+                return curr1;
+            }
+            curr1 = curr1.next;
+            curr2 = curr2.next;
+        }
+        
+        return null;
     }
     
     private ListNode set(ListNode headA, ListNode headB) {
-        /*
-        how can we do this in not n^2 time?
-        put nodes inside of a set maybe? but, need to verify that the set will 
-        operate on memory addresses, not just object properties.
-        */
-        
         Set<ListNode> setB = new HashSet<>();
         
         // put all listB nodes inside of setB.
