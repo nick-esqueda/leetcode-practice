@@ -34,16 +34,16 @@ class Solution {
         return buildTree(nums, 0, nums.length - 1);
     }
     
-    private TreeNode buildTree(int[] nums, int start, int end) { // "end" IS INCLUSIVE.
-        if (start > end) { 
+    private TreeNode buildTree(int[] nums, int lo, int hi) { // "hi" IS INCLUSIVE.
+        if (lo > hi) { 
             return null;
         }
         
-        int mid = (end + start) / 2; // left mid.
+        int mid = lo + (hi - lo) / 2; // left mid.
         
         TreeNode root = new TreeNode(nums[mid]);
-        root.left = buildTree(nums, start, mid - 1);
-        root.right = buildTree(nums, mid + 1, end);
+        root.left = buildTree(nums, lo, mid - 1);
+        root.right = buildTree(nums, mid + 1, hi);
         return root;
     }
 }
