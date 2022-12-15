@@ -24,12 +24,15 @@ public class Solution {
         
         Set<ListNode> setB = new HashSet<>();
         
+        // put all listB nodes inside of setB.
         ListNode currB = headB;
         while (currB != null) {
             setB.add(currB);
             currB = currB.next;
         }
         
+        // traverse through listA, checking to see if a node exists in setB.
+        // if so, return that node, because it is the intersection.
         ListNode currA = headA;
         while (currA != null) {
             if (setB.contains(currA)) {
