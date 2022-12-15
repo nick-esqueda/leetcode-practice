@@ -29,7 +29,8 @@ class Solution {
                   b
         */
         
-        threePointersV1(nums1, m, nums2, n);
+        // threePointersV1(nums1, m, nums2, n);
+        threePointersV2(nums1, m, nums2, n);
     }
     
     private void threePointersV2(int[] nums1, int m, int[] nums2, int n) {
