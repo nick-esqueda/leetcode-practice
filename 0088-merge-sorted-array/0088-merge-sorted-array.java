@@ -29,7 +29,8 @@ class Solution {
                   b
         */
         
-        mergeAndSort(nums1, m, nums2, n);
+        // mergeAndSort(nums1, m, nums2, n);
+        twoPointers(nums1, m, nums2, n);
         // threePointersV1(nums1, m, nums2, n);
         // threePointersV2(nums1, m, nums2, n);
     }
@@ -66,6 +67,28 @@ class Solution {
                 nums1[insertionPoint--] = nums1[idx1--];
             } else {
                 nums1[insertionPoint--] = nums2[idx2--];
+            }
+        }
+    }
+    
+    private void twoPointers(int[] nums1, int m, int[] nums2, int n) {
+        int[] copy1 = new int[m];
+        for (int i = 0; i < m; ++i) {
+            copy1[i] = nums1[i];
+        }
+        
+        int insertionPoint = 0;
+        int idx1 = 0;
+        int idx2 = 0;
+        while (insertionPoint < nums1.length) {
+            if (idx1 == copy1.length) {
+                nums1[insertionPoint++] = nums2[idx2++];
+            } else if (idx2 == nums2.length) {
+                nums1[insertionPoint++] = copy1[idx1++];
+            } else if (copy1[idx1] < nums2[idx2]) {
+                nums1[insertionPoint++] = copy1[idx1++];
+            } else {
+                nums1[insertionPoint++] = nums2[idx2++];
             }
         }
     }
