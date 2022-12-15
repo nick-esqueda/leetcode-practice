@@ -12,10 +12,10 @@
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         // return bruteForce(headA, headB);
-        return a(headA, headB);
+        return set(headA, headB);
     }
     
-    private ListNode a(ListNode headA, ListNode headB) {
+    private ListNode set(ListNode headA, ListNode headB) {
         /*
         how can we do this in not n^2 time?
         put nodes inside of a set maybe? but, need to verify that the set will 
