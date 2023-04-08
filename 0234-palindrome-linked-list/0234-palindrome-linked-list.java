@@ -12,12 +12,15 @@ class Solution {
     public boolean isPalindrome(ListNode head) {
         List<Integer> orderedListValues = new ArrayList<>();
         
+        // collect node values in an ordered list.
         ListNode currentNode = head;
         while (currentNode != null) {
             orderedListValues.add(currentNode.val);
             currentNode = currentNode.next;
         }
 
+        // iterate over linked list forwards, iterate over ordered list backwards,
+        // if not equal during an iteration, then list is not palindrome.
         currentNode = head;
         for (int i = orderedListValues.size() - 1; i >= 0; --i) {
             int val1 = orderedListValues.get(i);
