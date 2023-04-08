@@ -1,5 +1,9 @@
 class Solution {
     public int firstUniqChar(String s) {
+        return hashMap(s);
+    }
+    
+    public int hashMap(String s) {
         Map<Character, Integer> counts = new HashMap<>();
         for (Character c : s.toCharArray()) {
             int charCount = counts.getOrDefault(c, 0);
